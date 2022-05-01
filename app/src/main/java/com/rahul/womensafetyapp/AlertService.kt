@@ -8,6 +8,9 @@ import android.hardware.Sensor
 import android.hardware.SensorEvent
 import android.hardware.SensorEventListener
 import android.hardware.SensorManager
+import android.media.Ringtone
+import android.media.RingtoneManager
+import android.net.Uri
 import android.os.Handler
 import android.os.IBinder
 import android.telephony.SmsManager
@@ -21,11 +24,13 @@ class AlertService : Service() {
     var last_acc = 10f
     private var shake = 0
     private var lastShakeTime = 0L
+    lateinit var notificationTone : Ringtone
 
     private fun detectThriceShake(){
         // Toast.makeText(this, "Shake was detected", Toast.LENGTH_SHORT).show()
         if (shake >= 17){
             Toast.makeText(this, "Shake was detected" + shake, Toast.LENGTH_SHORT).show()
+            notificationTone.play()
             shake = 0
         }
         if (Date().time - lastShakeTime < 700 || lastShakeTime == 0L){
@@ -78,6 +83,9 @@ class AlertService : Service() {
             .setContentIntent(pendingIntent)
             .setTicker("tickerText")
             .build()
+
+        val notif = RingtoneManager.getDefaultUri(RingtoneManager.TYPE_NOTIFICATION)
+        notificationTone = RingtoneManager.getRingtone(this, notif)
 
         activateSensors()
 
