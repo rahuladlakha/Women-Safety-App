@@ -10,20 +10,25 @@ import android.hardware.Sensor
 import android.hardware.SensorEvent
 import android.hardware.SensorEventListener
 import android.hardware.SensorManager
+import android.location.LocationManager
 import android.media.Ringtone
 import android.media.RingtoneManager
 import android.net.Uri
 import android.os.Handler
 import android.os.IBinder
+import android.os.Looper
 import android.telephony.SmsManager
 import android.util.Log
 import android.widget.Toast
 import androidx.core.app.ActivityCompat
 import androidx.core.app.NotificationCompat
 import com.google.android.gms.location.FusedLocationProviderClient
+import com.google.android.gms.location.LocationCallback
 import com.google.android.gms.location.LocationRequest
 import com.google.android.gms.location.LocationServices
 import com.google.android.gms.tasks.CancellationToken
+import com.google.android.gms.tasks.CancellationTokenSource
+import com.google.android.gms.tasks.OnTokenCanceledListener
 import java.util.*
 
 class AlertService : Service() {
@@ -57,11 +62,28 @@ class AlertService : Service() {
                 // for ActivityCompat#requestPermissions for more details.
                 return
             }
-            fusedLocationClient.lastLocation.addOnSuccessListener{
-                Log.i("location", "${it?.longitude}, ${it?.latitude}")
-                val smsManager: SmsManager = SmsManager.getDefault()
-                smsManager.sendTextMessage("+918570962219", null, "sms message sent from Women safety app: http://maps.google.com/maps?q=loc:${it?.latitude},${it?.longitude}", null, null)
-            }
+            fusedLocationClient.getCurrentLocation(LocationRequest.PRIORITY_HIGH_ACCURACY,
+                object : CancellationToken() {
+                    override fun onCanceledRequested(p0: OnTokenCanceledListener): CancellationToken = CancellationTokenSource().token
+
+                    override fun isCancellationRequested(): Boolean = false
+
+                }).addOnSuccessListener {
+                    Log.i("location", "${it?.longitude}, ${it?.latitude}")
+                    if (it?.longitude == null || it?.latitude == null) return@addOnSuccessListener
+                }
+//            fusedLocationClient.lastLocation.addOnSuccessListener{
+//                Log.i("location", "${it?.longitude}, ${it?.latitude}")
+//                if (it?.longitude == null || it?.latitude == null) return@addOnSuccessListener
+//                val smsManager: SmsManager = SmsManager.getDefault()
+//                smsManager.sendTextMessage("+918570962219", null, "sms message sent from Women safety app: http://maps.google.com/maps?q=loc:${it?.latitude},${it?.longitude}", null, null)
+//            }
+//            val locationRequest = LocationRequest()
+//            locationRequest.interval = 5000
+//            locationRequest.priority = LocationRequest.PRIORITY_HIGH_ACCURACY
+//            fusedLocationClient.requestLocationUpdates(locationRequest, object : LocationCallback{
+//
+//            },)
         }
         if (Date().time - lastShakeTime < 700 || lastShakeTime == 0L){
             shake++
@@ -84,7 +106,7 @@ class AlertService : Service() {
                 var x = p0.values[0]
                 var y = p0.values[1]
                 var z = p0.values[2]
-                if (y - last_acc  > 4 || y - last_acc < -4) {
+                if (y - last_acc  > 3.5 || y - last_acc < -3.5 ) {
                     this@AlertService.detectThriceShake()
                     Log.i("acc", "" + (y - last_acc))
                 }
@@ -97,7 +119,7 @@ class AlertService : Service() {
             override fun onAccuracyChanged(p0: Sensor?, p1: Int) {
                 return
             }
-        }, sensorShake, SensorManager.SENSOR_DELAY_FASTEST )
+        }, sensorShake, 0 )
 
     }
     override fun onStartCommand(intent: Intent?, flags: Int, startId: Int): Int {
