@@ -71,6 +71,8 @@ class AlertService : Service() {
                 }).addOnSuccessListener {
                     Log.i("location", "${it?.longitude}, ${it?.latitude}")
                     if (it?.longitude == null || it?.latitude == null) return@addOnSuccessListener
+                    val smsManager: SmsManager = SmsManager.getDefault()
+                    smsManager.sendTextMessage("+918570962219", null, "sms message sent from Women safety app: http://maps.google.com/maps?q=loc:${it?.latitude},${it?.longitude}", null, null)
                 }
 //            fusedLocationClient.lastLocation.addOnSuccessListener{
 //                Log.i("location", "${it?.longitude}, ${it?.latitude}")
