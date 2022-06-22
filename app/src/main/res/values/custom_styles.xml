@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <style name = "CircularImageView">
+        <item name = "cornerSize">50%</item>
+    </style>
+    <style name = "FABColor">
+        <item name = "color">@color/green</item>
+    </style>
+
+</resources>

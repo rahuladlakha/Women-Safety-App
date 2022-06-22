@@ -5,6 +5,8 @@ import android.app.NotificationChannel
 import android.app.NotificationManager
 import android.content.Intent
 import android.content.pm.PackageManager
+import android.content.res.ColorStateList
+import android.graphics.Color
 import android.hardware.Sensor
 import android.hardware.SensorEvent
 import android.hardware.SensorEventListener
@@ -12,24 +14,33 @@ import android.hardware.SensorManager
 import android.os.Build
 import android.os.Bundle
 import android.util.Log
+import android.view.View
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.app.ActivityCompat
 import androidx.core.content.ContextCompat
+import kotlinx.android.synthetic.main.activity_main.*
 import java.util.*
 
 class MainActivity : AppCompatActivity() {
     val permissions = arrayOf( Manifest.permission.ACCESS_FINE_LOCATION,Manifest.permission.ACCESS_COARSE_LOCATION,Manifest.permission.ACCESS_BACKGROUND_LOCATION, Manifest.permission.SEND_SMS, Manifest.permission.FOREGROUND_SERVICE)
+    val changeButtonColor = {b : Boolean ->  material_button.backgroundTintList = ColorStateList.valueOf(getColor(if (b) R.color.green else R.color.red))}
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
+        material_button.setOnClickListener(object : View.OnClickListener{
+            override fun onClick(p0: View?) {
+                protectionStatus.text = if (protectionStatus.text == "ON") "OFF" else "ON"
+                changeButtonColor(protectionStatus.text == "ON")
+            }
+        })
+
         checkPermissions()
         createNotificationChannel()
-
+        
         val intent = Intent(this, AlertService::class.java) // Build the intent for the service
         applicationContext.startForegroundService(intent)
-
 
     }
 
