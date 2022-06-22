@@ -33,7 +33,9 @@ import com.google.android.gms.tasks.OnTokenCanceledListener
 import java.util.*
 
 class AlertService : Service() {
-
+    companion object {
+        var isServiceRunning = false;
+    }
     var last_acc = 10f
     private var shake = 0
     private var lastShakeTime = 0L
@@ -131,6 +133,7 @@ class AlertService : Service() {
 
     }
     override fun onStartCommand(intent: Intent?, flags: Int, startId: Int): Int {
+        isServiceRunning = true
         val pendingIntent: PendingIntent =
             Intent(this, AlertService::class.java).let { notificationIntent ->
                 PendingIntent.getActivity(this, 0, notificationIntent, 0)
@@ -166,5 +169,12 @@ class AlertService : Service() {
     }
     override fun onBind(p0: Intent?): IBinder? {
         return null
+    }
+
+    override fun onDestroy() {
+        isServiceRunning = false
+        this@AlertService.stopForeground(true)
+        stopSelf() //stopForeground stops the service but it is still running in background.
+          //  stopSelf stops the service itself
     }
 }

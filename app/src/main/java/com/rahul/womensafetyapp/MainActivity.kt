@@ -24,24 +24,29 @@ import java.util.*
 
 class MainActivity : AppCompatActivity() {
     val permissions = arrayOf( Manifest.permission.ACCESS_FINE_LOCATION,Manifest.permission.ACCESS_COARSE_LOCATION,Manifest.permission.ACCESS_BACKGROUND_LOCATION, Manifest.permission.SEND_SMS, Manifest.permission.FOREGROUND_SERVICE)
-    val changeButtonColor = {b : Boolean ->  material_button.backgroundTintList = ColorStateList.valueOf(getColor(if (b) R.color.green else R.color.red))}
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
         material_button.setOnClickListener(object : View.OnClickListener{
             override fun onClick(p0: View?) {
-                protectionStatus.text = if (protectionStatus.text == "ON") "OFF" else "ON"
-                changeButtonColor(protectionStatus.text == "ON")
+                enableProtection(protectionStatus.text != "ON")
             }
         })
 
         checkPermissions()
         createNotificationChannel()
-        
-        val intent = Intent(this, AlertService::class.java) // Build the intent for the service
-        applicationContext.startForegroundService(intent)
+        enableProtection(AlertService.isServiceRunning)
 
+    }
+    fun enableProtection(b : Boolean){
+        material_button.backgroundTintList = ColorStateList.valueOf(getColor(if (b) R.color.green else R.color.red))
+        protectionStatus.text = if (b) "ON" else "OFF"
+        if (b) {
+            startForegroundService(Intent(this, AlertService::class.java))
+        } else {
+            stopService(Intent(this, AlertService::class.java))
+        }
     }
 
     private fun createNotificationChannel() {
