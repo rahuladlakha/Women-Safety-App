@@ -4,6 +4,7 @@ import android.Manifest
 import android.app.Notification
 import android.app.PendingIntent
 import android.app.Service
+import android.content.Context
 import android.content.Intent
 import android.content.pm.PackageManager
 import android.hardware.Sensor
@@ -43,6 +44,11 @@ class AlertService : Service() {
         // Toast.makeText(this, "Shake was detected", Toast.LENGTH_SHORT).show()
         if (shake >= 17){
             Toast.makeText(this, "Shake was detected" + shake, Toast.LENGTH_SHORT).show()
+            val sp = this.getSharedPreferences("com.rahul.womenSafetyApp", Context.MODE_PRIVATE);
+            val name = sp.getString("user name", " ")?: " "
+            val contacts = sp.getString("emergency contacts", " ") ?: " ".trim().split(" ")
+            Toast.makeText(this, contacts.toString(), Toast.LENGTH_SHORT).show()
+
             notificationTone.play()
             shake = 0
             if (ActivityCompat.checkSelfPermission(
