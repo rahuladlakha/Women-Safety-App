@@ -4,6 +4,7 @@ import android.Manifest
 import android.content.Context
 import android.content.DialogInterface
 import android.content.Intent
+import android.content.SharedPreferences
 import android.content.pm.PackageManager
 import android.content.res.ColorStateList
 import android.net.Uri
@@ -16,6 +17,15 @@ import androidx.core.content.ContextCompat
 import kotlinx.android.synthetic.main.activity_main.*
 import java.nio.channels.InterruptedByTimeoutException
 
+//class UserData {
+//    val sp : SharedPreferences
+//    init {
+//        this.sp = this.getSharedPreferences("com.rahul.womenSafetyApp", Context.MODE_PRIVATE);
+//    }
+//    companion object {
+//        val name : String
+//    }
+//}
 private val permissions = arrayOf( Manifest.permission.ACCESS_FINE_LOCATION ,
     Manifest.permission.ACCESS_COARSE_LOCATION ,
     Manifest.permission.ACCESS_BACKGROUND_LOCATION, Manifest.permission.SEND_SMS, Manifest.permission.FOREGROUND_SERVICE

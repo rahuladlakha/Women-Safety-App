@@ -36,15 +36,15 @@ class AlertService : Service() {
     companion object {
         var isServiceRunning = false;
     }
-    var last_acc = 10f
     private var shake = 0
     private var lastShakeTime = 0L
     lateinit var notificationTone : Ringtone
     private lateinit var fusedLocationClient : FusedLocationProviderClient
+    private var isAccPositive = false //this variable will be used by detecteThriceshake method to detect the up-down movements
 
     private fun detectThriceShake(){
         // Toast.makeText(this, "Shake was detected", Toast.LENGTH_SHORT).show()
-        if (shake >= 17){
+        if (shake >= 5){
             Toast.makeText(this, "Shake was detected" + shake, Toast.LENGTH_SHORT).show()
             val sp = this.getSharedPreferences("com.rahul.womenSafetyApp", Context.MODE_PRIVATE);
             val name = sp.getString("user name", " ")?: " "
@@ -82,20 +82,8 @@ class AlertService : Service() {
                     val smsManager: SmsManager = SmsManager.getDefault()
                     smsManager.sendTextMessage("+918570962219", null, "sms message sent from Women safety app: http://maps.google.com/maps?q=loc:${it?.latitude},${it?.longitude}", null, null)
                 }
-//            fusedLocationClient.lastLocation.addOnSuccessListener{
-//                Log.i("location", "${it?.longitude}, ${it?.latitude}")
-//                if (it?.longitude == null || it?.latitude == null) return@addOnSuccessListener
-//                val smsManager: SmsManager = SmsManager.getDefault()
-//                smsManager.sendTextMessage("+918570962219", null, "sms message sent from Women safety app: http://maps.google.com/maps?q=loc:${it?.latitude},${it?.longitude}", null, null)
-//            }
-//            val locationRequest = LocationRequest()
-//            locationRequest.interval = 5000
-//            locationRequest.priority = LocationRequest.PRIORITY_HIGH_ACCURACY
-//            fusedLocationClient.requestLocationUpdates(locationRequest, object : LocationCallback{
-//
-//            },)
         }
-        if (Date().time - lastShakeTime < 700 || lastShakeTime == 0L){
+        if (Date().time - lastShakeTime < 800 || lastShakeTime == 0L){
             shake++
             lastShakeTime = Date().time
             //Toast.makeText(this, "" + shake, Toast.LENGTH_SHORT).show()
@@ -116,13 +104,13 @@ class AlertService : Service() {
                 var x = p0.values[0]
                 var y = p0.values[1]
                 var z = p0.values[2]
-                if (y - last_acc  > 3.5 || y - last_acc < -3.5 ) {
-                    this@AlertService.detectThriceShake()
-                    Log.i("acc", "" + (y - last_acc))
+                if (y  > 25.0 || y  < -5.0 ) {
+                    if ( isAccPositive != (y > 0) ) {
+                        isAccPositive = !isAccPositive
+                        this@AlertService.detectThriceShake()
+                        Log.i("acc", "" + (y))
+                    }
                 }
-
-//                    Toast.makeText(this@MainActivity, "Shake event detected", Toast.LENGTH_SHORT).show()
-                last_acc = y
 
             }
 
@@ -153,17 +141,9 @@ class AlertService : Service() {
         fusedLocationClient = LocationServices.getFusedLocationProviderClient(this) // For accessing location in the
         //background we use the FusedLocation api
 
-
 // Notification ID cannot be 0.
         startForeground(98, notification)
 
-//        Handler().postDelayed(Runnable {
-////            val smsManager: SmsManager = SmsManager.getDefault()
-////            smsManager.sendTextMessage("+918570962219", null, "sms message sent from Women safety app", null, null)
-//            this@AlertService.stopForeground(true)
-//            stopSelf() //stopForeground stops the service but it is still running in background.
-////          //  stopSelf stops the service itself
-//        }, 5000)
         return super.onStartCommand(intent, flags, startId)
 
     }
