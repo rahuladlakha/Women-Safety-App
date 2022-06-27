@@ -10,7 +10,9 @@
         android:id="@+id/backgroundImageView"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:scaleType="centerCrop" />
+        android:scaleType="centerCrop"
+        tools:layout_editor_absoluteX="-36dp"
+        tools:layout_editor_absoluteY="0dp" />
 
     <EditText
         android:id="@+id/NameEditText"
@@ -21,7 +23,7 @@
         android:layout_marginEnd="20dp"
         android:layout_marginTop="60dp"
         android:background="@drawable/edittext_layout"
-        android:textSize="20sp"
+        android:textSize="18sp"
         android:padding="10dp"
         android:ems="10"
         android:hint="Enter your name"
@@ -30,54 +32,134 @@
         app:layout_constraintStart_toStartOf="@+id/backgroundImageView"
         app:layout_constraintTop_toTopOf="@+id/backgroundImageView"/>
 
-    <EditText
-        android:id="@+id/emergencyContact1"
+    <LinearLayout
         android:layout_width="0dp"
         android:layout_height="wrap_content"
-        android:layout_marginStart="0dp"
-        android:layout_marginEnd="0dp"
-        android:background="@drawable/edittext_layout"
-        android:textSize="20sp"
-        android:padding="10dp"
         android:layout_marginTop="20dp"
-        android:ems="10"
-        android:hint="Emergency contact 1"
-        android:inputType="phone"
+        android:orientation="vertical"
         app:layout_constraintEnd_toEndOf="@+id/NameEditText"
         app:layout_constraintStart_toStartOf="@+id/NameEditText"
-        app:layout_constraintTop_toBottomOf="@+id/NameEditText"/>
-    <EditText
-        android:id="@+id/emergencyContact2"
-        android:layout_width="0dp"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="0dp"
-        android:layout_marginEnd="0dp"
-        android:layout_marginTop="20dp"
-        android:background="@drawable/edittext_layout"
-        android:textSize="20sp"
-        android:padding="10dp"
-        android:ems="10"
-        android:hint="Emergency contact 2 (optional)"
-        android:inputType="phone"
-        app:layout_constraintEnd_toEndOf="@+id/NameEditText"
-        app:layout_constraintStart_toStartOf="@+id/NameEditText"
-        app:layout_constraintTop_toBottomOf="@+id/emergencyContact1"/>
-    <EditText
-        android:id="@+id/emergencyContact3"
-        android:layout_width="0dp"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="0dp"
-        android:layout_marginEnd="0dp"
-        android:layout_marginTop="20dp"
-        android:background="@drawable/edittext_layout"
-        android:textSize="20sp"
-        android:padding="10dp"
-        android:ems="10"
-        android:hint="Emergency contact 3 (optional)"
-        android:inputType="phone"
-        app:layout_constraintEnd_toEndOf="@+id/NameEditText"
-        app:layout_constraintStart_toStartOf="@+id/NameEditText"
-        app:layout_constraintTop_toBottomOf="@+id/emergencyContact2"/>
+        app:layout_constraintTop_toBottomOf="@+id/NameEditText">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal">
+
+            <com.hbb20.CountryCodePicker
+                android:id="@+id/ccp1"
+                app:ccp_showNameCode="false"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center_vertical"
+                app:ccpDialog_background="@drawable/edittext_layout"
+                app:ccpDialog_cornerRadius="4dp"
+                app:ccp_padding="0dp"
+                app:ccp_textSize="18sp" />
+
+            <EditText
+                android:id="@+id/emergencyContact1"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:background="@drawable/edittext_layout"
+                android:ems="10"
+                android:hint="Emergency contact 1"
+                android:inputType="phone"
+                android:padding="10dp"
+                android:textSize="18sp" />
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="20dp"
+            android:orientation="horizontal">
+
+            <com.hbb20.CountryCodePicker
+                android:id="@+id/ccp2"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                app:ccp_showNameCode="false"
+                android:layout_gravity="center_vertical"
+                app:ccpDialog_background="@drawable/edittext_layout"
+                app:ccpDialog_cornerRadius="4dp"
+                app:ccp_padding="0dp"
+                app:ccp_textSize="18sp" />
+
+            <EditText
+                android:id="@+id/emergencyContact2"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:background="@drawable/edittext_layout"
+                android:ems="10"
+                android:hint="Emergency contact 2 (optional)"
+                android:inputType="phone"
+                android:padding="10dp"
+                android:textSize="18sp" />
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="20dp"
+            android:orientation="horizontal">
+
+            <com.hbb20.CountryCodePicker
+                android:id="@+id/ccp3"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                app:ccp_showNameCode="false"
+                android:layout_gravity="center_vertical"
+                app:ccpDialog_background="@drawable/edittext_layout"
+                app:ccpDialog_cornerRadius="4dp"
+                app:ccp_padding="0dp"
+                app:ccp_textSize="18sp" />
+
+            <EditText
+                android:id="@+id/emergencyContact3"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:background="@drawable/edittext_layout"
+                android:ems="10"
+                android:hint="Emergency contact 3 (optional)"
+                android:inputType="phone"
+                android:padding="10dp"
+                android:textSize="18sp" />
+        </LinearLayout>
+    </LinearLayout>
+<!--    -->
+<!--    <EditText-->
+<!--        android:id="@+id/emergencyContact2"-->
+<!--        android:layout_width="0dp"-->
+<!--        android:layout_height="wrap_content"-->
+<!--        android:layout_marginStart="0dp"-->
+<!--        android:layout_marginEnd="0dp"-->
+<!--        android:layout_marginTop="20dp"-->
+<!--        android:background="@drawable/edittext_layout"-->
+<!--        android:textSize="20sp"-->
+<!--        android:padding="10dp"-->
+<!--        android:ems="10"-->
+<!--        android:hint="Emergency contact 2 (optional)"-->
+<!--        android:inputType="phone"-->
+<!--        app:layout_constraintEnd_toEndOf="@+id/NameEditText"-->
+<!--        app:layout_constraintStart_toStartOf="@+id/NameEditText"-->
+<!--        app:layout_constraintTop_toBottomOf="@+id/em1"/>-->
+<!--    <EditText-->
+<!--        android:id="@+id/emergencyContact3"-->
+<!--        android:layout_width="0dp"-->
+<!--        android:layout_height="wrap_content"-->
+<!--        android:layout_marginStart="0dp"-->
+<!--        android:layout_marginEnd="0dp"-->
+<!--        android:layout_marginTop="20dp"-->
+<!--        android:background="@drawable/edittext_layout"-->
+<!--        android:textSize="20sp"-->
+<!--        android:padding="10dp"-->
+<!--        android:ems="10"-->
+<!--        android:hint="Emergency contact 3 (optional)"-->
+<!--        android:inputType="phone"-->
+<!--        app:layout_constraintEnd_toEndOf="@+id/NameEditText"-->
+<!--        app:layout_constraintStart_toStartOf="@+id/NameEditText"-->
+<!--        app:layout_constraintTop_toBottomOf="@+id/emergencyContact2"/>-->
 
     <Button
         android:id="@+id/saveButton"

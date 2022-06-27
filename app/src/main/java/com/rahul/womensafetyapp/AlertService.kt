@@ -45,10 +45,10 @@ class AlertService : Service() {
     private fun detectThriceShake(){
         // Toast.makeText(this, "Shake was detected", Toast.LENGTH_SHORT).show()
         if (shake >= 5){
-            Toast.makeText(this, "Shake was detected" + shake, Toast.LENGTH_SHORT).show()
+            Toast.makeText(this, "Shake was detected" , Toast.LENGTH_SHORT).show()
             val sp = this.getSharedPreferences("com.rahul.womenSafetyApp", Context.MODE_PRIVATE);
             val name = sp.getString("user name", " ")?: " "
-            val contacts = sp.getString("emergency contacts", " ") ?: " ".trim().split(" ")
+            val contacts : List<String> = (sp.getString("emergency contacts", " ") ?: " ").trim().split("*")
             Toast.makeText(this, contacts.toString(), Toast.LENGTH_SHORT).show()
 
             notificationTone.play()
@@ -77,11 +77,23 @@ class AlertService : Service() {
                     override fun isCancellationRequested(): Boolean = false
 
                 }).addOnSuccessListener {
-                    Log.i("location", "${it?.longitude}, ${it?.latitude}")
-                    if (it?.longitude == null || it?.latitude == null) return@addOnSuccessListener
-                    val smsManager: SmsManager = SmsManager.getDefault()
-                    smsManager.sendTextMessage("+918570962219", null, "sms message sent from Women safety app: http://maps.google.com/maps?q=loc:${it?.latitude},${it?.longitude}", null, null)
-                }
+                Log.i("location", "${it?.longitude}, ${it?.latitude}")
+                if (it?.longitude == null || it?.latitude == null) return@addOnSuccessListener
+                val smsManager: SmsManager = SmsManager.getDefault()
+                val smsDes =
+                    "This sms message was sent from Women safety app to you since you are an emergency contact of this user. An SOS signal was detected, kindly contact this phone number soon to know if everything's right. User's current location is : "
+//                for (contact in contacts) {
+                    Toast.makeText(this@AlertService, "Sending SMS to emergency contacts ${contacts[0]}",Toast.LENGTH_SHORT).show()
+                    smsManager.sendTextMessage(
+                        "08570962219",
+                        null,
+                        "$smsDes http://maps.google.com/maps?q=loc:${it?.latitude},${it?.longitude}",
+                        null,
+                        null
+                    )
+
+//                }
+            }
         }
         if (Date().time - lastShakeTime < 800 || lastShakeTime == 0L){
             shake++

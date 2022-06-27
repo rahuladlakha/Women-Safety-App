@@ -29,7 +29,7 @@ class SignUpActivity : AppCompatActivity() {
         saveButton.setOnClickListener(object: View.OnClickListener{
             override fun onClick(p0: View?) {
                 val name = NameEditText.text.toString().trim()
-                val emContacts = arrayOf<String>(emergencyContact1.text.toString().trim(), emergencyContact2.text.toString().trim(), emergencyContact3.text.toString().trim())
+                val emContacts = arrayOf<String>(ccp1.selectedCountryCode.trim() + " "+ emergencyContact1.text.toString().trim(), ccp2.selectedCountryCode.trim() + emergencyContact2.text.toString().trim(), ccp3.selectedCountryCode.trim() + emergencyContact3.text.toString().trim())
                 if (name.isEmpty()) {
                         Toast.makeText(
                             this@SignUpActivity,
@@ -46,7 +46,7 @@ class SignUpActivity : AppCompatActivity() {
                         return
                 }
                 sp.edit().putString("user name", name)
-                    .putString("emergency contacts", "${emContacts[0]} ${emContacts[1]} ${emContacts[2]}")
+                    .putString("emergency contacts", "${emContacts[0]}*${emContacts[1]}*${emContacts[2]}")
                     .apply()
 
                 startActivity(Intent(this@SignUpActivity, MainActivity::class.java))
