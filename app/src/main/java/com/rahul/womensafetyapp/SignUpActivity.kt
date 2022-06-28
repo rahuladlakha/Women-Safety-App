@@ -29,7 +29,11 @@ class SignUpActivity : AppCompatActivity() {
         saveButton.setOnClickListener(object: View.OnClickListener{
             override fun onClick(p0: View?) {
                 val name = NameEditText.text.toString().trim()
-                val emContacts = arrayOf<String>(ccp1.selectedCountryCode.trim() + " "+ emergencyContact1.text.toString().trim(), ccp2.selectedCountryCode.trim() + emergencyContact2.text.toString().trim(), ccp3.selectedCountryCode.trim() + emergencyContact3.text.toString().trim())
+                var emContacts = arrayOf<String>(ccp1.selectedCountryCode.trim() + emergencyContact1.text.toString().trim(), ccp2.selectedCountryCode.trim() + emergencyContact2.text.toString().trim(), ccp3.selectedCountryCode.trim() + emergencyContact3.text.toString().trim())
+                for ( i in 0..(emContacts.size-1)){
+                    if (!emContacts[i].startsWith("+"))
+                        emContacts[i] = "+${emContacts[i]}"
+                }
                 if (name.isEmpty()) {
                         Toast.makeText(
                             this@SignUpActivity,

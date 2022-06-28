@@ -31,8 +31,10 @@ import com.google.android.gms.tasks.CancellationToken
 import com.google.android.gms.tasks.CancellationTokenSource
 import com.google.android.gms.tasks.OnTokenCanceledListener
 import java.util.*
+import kotlin.collections.ArrayList
 
 class AlertService : Service() {
+    lateinit var smsManager: SmsManager
     companion object {
         var isServiceRunning = false;
     }
@@ -49,6 +51,12 @@ class AlertService : Service() {
             val sp = this.getSharedPreferences("com.rahul.womenSafetyApp", Context.MODE_PRIVATE);
             val name = sp.getString("user name", " ")?: " "
             val contacts : List<String> = (sp.getString("emergency contacts", " ") ?: " ").trim().split("*")
+
+            var smsDes = "HELP!\nThis SMS was sent from Women safety app to you since you are an emergency contact in this user's contact list. Kindly call this contact soon."
+            for (contact in contacts)
+                smsManager.sendTextMessage(contact, null, smsDes, null, null)
+            // Note that the maximum length for sending sms with sendTextMessage is 160 characters. If text exceeds this range no msg will be sent.
+            //If the length is greater, we use sendMultiparttextMessage
             Toast.makeText(this, contacts.toString(), Toast.LENGTH_SHORT).show()
 
             notificationTone.play()
@@ -79,18 +87,27 @@ class AlertService : Service() {
                 }).addOnSuccessListener {
                 Log.i("location", "${it?.longitude}, ${it?.latitude}")
                 if (it?.longitude == null || it?.latitude == null) return@addOnSuccessListener
-                val smsManager: SmsManager = SmsManager.getDefault()
-                val smsDes =
-                    "This sms message was sent from Women safety app to you since you are an emergency contact of this user. An SOS signal was detected, kindly contact this phone number soon to know if everything's right. User's current location is : "
-//                for (contact in contacts) {
+
+                for (contact in contacts) {
                     Toast.makeText(this@AlertService, "Sending SMS to emergency contacts ${contacts[0]}",Toast.LENGTH_SHORT).show()
                     smsManager.sendTextMessage(
-                        "08570962219",
+                        contact,
                         null,
-                        "$smsDes http://maps.google.com/maps?q=loc:${it?.latitude},${it?.longitude}",
+                        "User's current location is :  http://maps.google.com/maps?q=loc:${it?.latitude},${it?.longitude}",
                         null,
                         null
                     )
+                // Note that the maximum length for sending sms with sendTextMessage is 160 characters. If text exceeds this range no msg will be sent.
+                //If the length is greater, we use sendMultiparttextMessage
+//                for (contact in contacts){
+//                    Log.i("Sending sms", "to ${contacts[0]}")
+//                    smsDes += " http://maps.google.com/maps?q=loc:${it?.latitude},${it?.longitude}"
+//                    val msgs = smsManager.divideMessage(smsDes) as ArrayList<String>
+//                    Log.i("SMSDes", smsDes)
+//                    smsManager.sendMultipartTextMessage("+918570962219", null, msgs, null, null)
+                    // Note that the maximum length for sending sms with sendTextMessage is 160 characters. If text exceeds this range no msg will be sent.
+                }
+                Toast.makeText(this@AlertService, "Sms sent",Toast.LENGTH_SHORT).show()
 
 //                }
             }
@@ -134,6 +151,7 @@ class AlertService : Service() {
     }
     override fun onStartCommand(intent: Intent?, flags: Int, startId: Int): Int {
         isServiceRunning = true
+        smsManager =  SmsManager.getDefault()
         val pendingIntent: PendingIntent =
             Intent(this, AlertService::class.java).let { notificationIntent ->
                 PendingIntent.getActivity(this, 0, notificationIntent, 0)
