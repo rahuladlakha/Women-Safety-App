@@ -31,6 +31,7 @@ class MainActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
+        supportActionBar?.title = null
 
         material_button.setOnClickListener(object : View.OnClickListener{
             override fun onClick(p0: View?) {
@@ -67,9 +68,11 @@ class MainActivity : AppCompatActivity() {
 
     override fun onOptionsItemSelected(item: MenuItem): Boolean {
         when (item.itemId){
-            R.id.settings_item -> {
+            R.id.tutorial_item -> {
                 startActivity(Intent(this,SettingsActivity::class.java))
             }
+            R.id.policy_item ->{}
+            R.id.emergeny_contacts_item -> {}
         }
         return super.onOptionsItemSelected(item)
     }

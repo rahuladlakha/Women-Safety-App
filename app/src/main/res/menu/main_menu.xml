@@ -2,10 +2,16 @@
 <menu xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto">
     <item
-        android:id="@+id/settings_item"
-        android:title="Settings"
-        android:icon="@drawable/ic_settings"
-        app:showAsAction="ifRoom"
-        />
+        android:id="@+id/tutorial_item"
+        android:title="Tutorial"
+        android:icon="@drawable/ic_info_outline"
+        app:showAsAction="ifRoom"/>
+    <item
+        android:id="@+id/emergeny_contacts_item"
+        android:title="Emergency Contacts" />
+
+    <item
+        android:id="@+id/policy_item"
+        android:title="Privacy Policy" />
 
 </menu>
