@@ -69,7 +69,7 @@ class MainActivity : AppCompatActivity() {
     override fun onOptionsItemSelected(item: MenuItem): Boolean {
         when (item.itemId){
             R.id.tutorial_item -> {
-                startActivity(Intent(this,SettingsActivity::class.java))
+                startActivity(Intent(this,TutorialActivity::class.java))
             }
             R.id.policy_item ->{}
             R.id.emergeny_contacts_item -> {}

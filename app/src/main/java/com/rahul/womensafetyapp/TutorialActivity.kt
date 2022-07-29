@@ -3,9 +3,11 @@ package com.rahul.womensafetyapp
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 
-class SettingsActivity : AppCompatActivity() {
+class TutorialActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        setContentView(R.layout.activity_settings)
+        setContentView(R.layout.activity_tutorial)
+        supportActionBar?.hide()
+        
     }
 }
