@@ -16,7 +16,7 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.WomenSafetyApp">
         <activity
-            android:name=".SettingsActivity"
+            android:name=".TutorialActivity"
             android:exported="false" />
         <activity
             android:name=".SignUpActivity"
@@ -38,6 +38,7 @@
         <activity
             android:name=".MainActivity"
             android:exported="true">
+
             <!-- <intent-filter> -->
             <!-- <action android:name="android.intent.action.MAIN" /> -->
 

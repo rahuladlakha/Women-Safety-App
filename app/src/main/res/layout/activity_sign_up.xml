@@ -145,6 +145,7 @@
         android:layout_width="0dp"
         android:layout_height="60dp"
         android:text="Save Details"
+        android:textColor="@color/white"
         android:layout_marginStart="20dp"
         android:layout_marginEnd="20dp"
         android:layout_marginBottom="20dp"

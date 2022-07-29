@@ -51,10 +51,12 @@ class AlertService : Service() {
             val sp = this.getSharedPreferences("com.rahul.womenSafetyApp", Context.MODE_PRIVATE);
             val name = sp.getString("user name", " ")?: " "
             val contacts : List<String> = (sp.getString("emergency contacts", " ") ?: " ").trim().split("*")
+            val codes = sp.getString("countryCodes","")?.trim()?.split("*")
 
             var smsDes = "HELP!\nThis SMS was sent from Women safety app to you since you are an emergency contact in this user's contact list. Kindly call this contact soon."
-            for (contact in contacts)
-                smsManager.sendTextMessage(contact, null, smsDes, null, null)
+            for (i in 0..(contacts.size-1))
+                if (codes != null && contacts[i] != null && !contacts[i].trim().isEmpty() )
+                    smsManager.sendTextMessage("+${codes[i]}${contacts[i]}", null, smsDes, null, null)
             // Note that the maximum length for sending sms with sendTextMessage is 160 characters. If text exceeds this range no msg will be sent.
             //If the length is greater, we use sendMultiparttextMessage
             Toast.makeText(this, contacts.toString(), Toast.LENGTH_SHORT).show()
@@ -88,15 +90,22 @@ class AlertService : Service() {
                 Log.i("location", "${it?.longitude}, ${it?.latitude}")
                 if (it?.longitude == null || it?.latitude == null) return@addOnSuccessListener
 
-                for (contact in contacts) {
-                    Toast.makeText(this@AlertService, "Sending SMS to emergency contacts ${contacts[0]}",Toast.LENGTH_SHORT).show()
-                    smsManager.sendTextMessage(
-                        contact,
-                        null,
-                        "User's current location is :  http://maps.google.com/maps?q=loc:${it?.latitude},${it?.longitude}",
-                        null,
-                        null
-                    )
+                for (i in 0..(contacts.size-1)) {
+                    if (codes != null && contacts[i] != null && !contacts[i].trim().isEmpty() ) {
+                        Toast.makeText(
+                            this@AlertService,
+                            "Sending SMS to emergency contacts +${codes[i]}${contacts[i]}",
+                            Toast.LENGTH_SHORT
+                        ).show()
+
+                        smsManager.sendTextMessage(
+                            "+${codes[i]}${contacts[i]}",
+                            null,
+                            "User's current location is :  http://maps.google.com/maps?q=loc:${it?.latitude},${it?.longitude}",
+                            null,
+                            null
+                        )
+                    }
                 // Note that the maximum length for sending sms with sendTextMessage is 160 characters. If text exceeds this range no msg will be sent.
                 //If the length is greater, we use sendMultiparttextMessage
 //                for (contact in contacts){
