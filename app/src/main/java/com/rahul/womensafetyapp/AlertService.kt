@@ -169,7 +169,7 @@ class AlertService : Service() {
         val notification : Notification = NotificationCompat.Builder(this, "service_notification")
             .setContentTitle("Women Safety App is running")
             .setContentText("Protection is on")
-            .setSmallIcon(R.drawable.ic_women_safety_app)
+            .setSmallIcon(R.drawable.ic_women_safety_app_outline)
             .setContentIntent(pendingIntent)
             .setTicker("tickerText")
             .build()
