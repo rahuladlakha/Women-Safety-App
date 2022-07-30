@@ -27,6 +27,11 @@ import kotlinx.android.synthetic.main.activity_sign_up.*
 import java.util.*
 
 class MainActivity : AppCompatActivity() {
+    /*
+    App icon is a modification of icon available at :
+    Pls copy paste below link in the app description on playstore
+    <a href="https://www.flaticon.com/free-icons/shield" title="shield icons">Shield icons created by Freepik - Flaticon</a>
+     */
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)

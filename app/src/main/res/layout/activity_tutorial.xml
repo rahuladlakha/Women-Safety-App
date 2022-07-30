@@ -40,7 +40,7 @@
         android:layout_marginStart="20dp"
         android:layout_marginTop="20dp"
         android:layout_marginEnd="20dp"
-        android:text="Shake the phone up and down 3 times to send an SOS signal"
+        android:text="Shake the device up and down 3 times to send an SOS signal"
         android:textAlignment="center"
         android:textColor="@color/red"
         android:textSize="24sp"
