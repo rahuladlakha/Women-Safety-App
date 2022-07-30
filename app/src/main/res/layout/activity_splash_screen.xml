@@ -6,13 +6,13 @@
     android:layout_height="match_parent"
     tools:context=".SplashScreenActivity">
 
-    <TextView
-        android:id="@+id/textView"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="197dp"
-        android:layout_marginTop="303dp"
-        android:text="SplashScreenActivity"
+    <ImageView
+        android:layout_width="252dp"
+        android:layout_height="252dp"
+        android:src="@drawable/ic_women_safety_app"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
+
 </androidx.constraintlayout.widget.ConstraintLayout>
