@@ -47,7 +47,7 @@ class AlertService : Service() {
     private fun detectThriceShake(){
         // Toast.makeText(this, "Shake was detected", Toast.LENGTH_SHORT).show()
         if (shake >= 5){
-            Toast.makeText(this, "Shake was detected" , Toast.LENGTH_SHORT).show()
+            Toast.makeText(this, "Emergency gesture was detected" , Toast.LENGTH_SHORT).show()
             val sp = this.getSharedPreferences("com.rahul.womenSafetyApp", Context.MODE_PRIVATE);
             val name = sp.getString("user name", " ")?: " "
             val contacts : List<String> = (sp.getString("emergency contacts", " ") ?: " ").trim().split("*")
@@ -55,8 +55,16 @@ class AlertService : Service() {
 
             var smsDes = "HELP!\nThis SMS was sent from Women safety app to you since you are an emergency contact in this user's contact list. Kindly call this contact soon."
             for (i in 0..(contacts.size-1))
-                if (codes != null && contacts[i] != null && !contacts[i].trim().isEmpty() )
-                    smsManager.sendTextMessage("+${codes[i]}${contacts[i]}", null, smsDes, null, null)
+                if (codes != null && contacts[i] != null && !contacts[i].trim().isEmpty() ) {
+                    smsManager.sendTextMessage(
+                        "+${codes[i]}${contacts[i]}",
+                        null,
+                        smsDes,
+                        null,
+                        null
+                    )
+                    Toast.makeText(this,"Sending SOS to emergency contact : ${codes[i]}${contacts[i]}",Toast.LENGTH_SHORT).show()
+                }
             // Note that the maximum length for sending sms with sendTextMessage is 160 characters. If text exceeds this range no msg will be sent.
             //If the length is greater, we use sendMultiparttextMessage
             //Toast.makeText(this, contacts.toString(), Toast.LENGTH_SHORT).show()
@@ -94,7 +102,7 @@ class AlertService : Service() {
                     if (codes != null && contacts[i] != null && !contacts[i].trim().isEmpty() ) {
                         Toast.makeText(
                             this@AlertService,
-                            "Sending SMS to emergency contacts +${codes[i]}${contacts[i]}",
+                            "Sending location to emergency contact: ${codes[i]}${contacts[i]}",
                             Toast.LENGTH_SHORT
                         ).show()
 
@@ -116,7 +124,7 @@ class AlertService : Service() {
 //                    smsManager.sendMultipartTextMessage("+918570962219", null, msgs, null, null)
                     // Note that the maximum length for sending sms with sendTextMessage is 160 characters. If text exceeds this range no msg will be sent.
                 }
-                Toast.makeText(this@AlertService, "Sms sent",Toast.LENGTH_SHORT).show()
+//                Toast.makeText(this@AlertService, "Sms sent",Toast.LENGTH_SHORT).show()
 
 //                }
             }

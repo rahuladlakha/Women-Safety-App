@@ -11,6 +11,10 @@
         android:title="Emergency Contacts" />
 
     <item
+        android:id="@+id/tnc_item"
+        android:title="Terms and Conditions"/>
+
+    <item
         android:id="@+id/policy_item"
         android:title="Privacy Policy" />
 
