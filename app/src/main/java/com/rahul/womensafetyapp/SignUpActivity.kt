@@ -30,15 +30,17 @@ class SignUpActivity : AppCompatActivity() {
             NameEditText.setText(name, TextView.BufferType.EDITABLE)
             val codes = sp.getString("countryCodes", null)?.trim()?.split("*")
             if (codes != null) {
-                Toast.makeText(this, codes.toString(),Toast.LENGTH_SHORT).show()
+                //Toast.makeText(this, codes.toString(),Toast.LENGTH_SHORT).show()
                 ccp1.setCountryForPhoneCode(codes[0].toInt())
                 ccp2.setCountryForPhoneCode(codes[1].toInt())
                 ccp3.setCountryForPhoneCode(codes[2].toInt())
             }
             if (contacts != null) {
                 emergencyContact1.setText(contacts[0], TextView.BufferType.EDITABLE)
-//                emergencyContact2.setText(contacts[1], TextView.BufferType.EDITABLE)
-//                emergencyContact3.setText(contacts[2], TextView.BufferType.EDITABLE)
+                if (contacts.size > 0)
+                emergencyContact2.setText(contacts[1], TextView.BufferType.EDITABLE)
+                if (contacts.size > 1)
+                emergencyContact3.setText(contacts[2], TextView.BufferType.EDITABLE)
             }
         }
         saveButton.setOnClickListener(object: View.OnClickListener{

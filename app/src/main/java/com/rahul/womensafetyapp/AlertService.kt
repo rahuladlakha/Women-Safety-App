@@ -59,7 +59,7 @@ class AlertService : Service() {
                     smsManager.sendTextMessage("+${codes[i]}${contacts[i]}", null, smsDes, null, null)
             // Note that the maximum length for sending sms with sendTextMessage is 160 characters. If text exceeds this range no msg will be sent.
             //If the length is greater, we use sendMultiparttextMessage
-            Toast.makeText(this, contacts.toString(), Toast.LENGTH_SHORT).show()
+            //Toast.makeText(this, contacts.toString(), Toast.LENGTH_SHORT).show()
 
             notificationTone.play()
             shake = 0

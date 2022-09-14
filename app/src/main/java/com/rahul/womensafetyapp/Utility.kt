@@ -1,21 +1,22 @@
 package com.rahul.womensafetyapp
 //this file contains a few necessary functions and classes used often in the app
+
 import android.Manifest
 import android.content.Context
+import android.content.Context.LOCATION_SERVICE
 import android.content.DialogInterface
 import android.content.Intent
-import android.content.SharedPreferences
 import android.content.pm.PackageManager
 import android.content.res.ColorStateList
-import android.net.Uri
-import android.provider.Settings
+import android.location.LocationManager
 import android.widget.Toast
 import androidx.appcompat.app.AlertDialog
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.app.ActivityCompat
 import androidx.core.content.ContextCompat
+import androidx.core.content.ContextCompat.getSystemService
 import kotlinx.android.synthetic.main.activity_main.*
-import java.nio.channels.InterruptedByTimeoutException
+
 
 //class UserData {
 //    val sp : SharedPreferences
@@ -76,7 +77,14 @@ fun enableProtection(activity: AppCompatActivity,b : Boolean){
     activity.protectionStatus.text = if (b) "ON" else "OFF"
     if (b) {
         activity.startForegroundService(Intent(activity, AlertService::class.java))
+        enableGPS(activity)
     } else {
         activity.stopService(Intent(activity, AlertService::class.java))
     }
+}
+
+fun enableGPS(activity: AppCompatActivity){
+    val mLocationManager: LocationManager = getSystemService(activity, LocationManager::class.java) as LocationManager
+    if (!mLocationManager.isProviderEnabled(LocationManager.GPS_PROVIDER))
+        Toast.makeText(activity, "Please turn GPS on",Toast.LENGTH_LONG).show()
 }
