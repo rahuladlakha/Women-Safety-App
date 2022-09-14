@@ -40,7 +40,7 @@
         android:layout_marginStart="20dp"
         android:layout_marginTop="20dp"
         android:layout_marginEnd="20dp"
-        android:text="Shake the device up and down 3 times to send an SOS signal"
+        android:text="@string/shake_tutorial"
         android:textAlignment="center"
         android:textColor="@color/red"
         android:textSize="24sp"
@@ -55,7 +55,7 @@
         android:layout_marginStart="20dp"
         android:layout_marginEnd="20dp"
         android:layout_marginBottom="20dp"
-        android:text="Got it"
+        android:text="@string/got_it"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent" />

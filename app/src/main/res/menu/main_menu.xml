@@ -3,19 +3,19 @@
     xmlns:app="http://schemas.android.com/apk/res-auto">
     <item
         android:id="@+id/tutorial_item"
-        android:title="Tutorial"
+        android:title="@string/tutorial"
         android:icon="@drawable/ic_info_outline"
         app:showAsAction="ifRoom"/>
     <item
         android:id="@+id/emergeny_contacts_item"
-        android:title="Emergency Contacts" />
+        android:title="@string/em_contacts" />
 
     <item
         android:id="@+id/tnc_item"
-        android:title="Terms and Conditions"/>
+        android:title="@string/terms_conditions"/>
 
     <item
         android:id="@+id/policy_item"
-        android:title="Privacy Policy" />
+        android:title="@string/pp" />
 
 </menu>

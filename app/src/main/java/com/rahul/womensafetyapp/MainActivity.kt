@@ -41,7 +41,7 @@ class MainActivity : AppCompatActivity() {
 
         material_button.setOnClickListener(object : View.OnClickListener{
             override fun onClick(p0: View?) {
-                enableProtection(this@MainActivity, protectionStatus.text != "ON")
+                enableProtection(this@MainActivity, protectionStatus.text != getString(R.string.on))
             }
         })
         checkPermissions(this)
@@ -56,8 +56,8 @@ class MainActivity : AppCompatActivity() {
         // the NotificationChannel class is new and not in the support library
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
             val importance = NotificationManager.IMPORTANCE_MIN
-            val channel = NotificationChannel("service_notification", "Background", importance)
-            channel.description = "Required for app to function in the background"
+            val channel = NotificationChannel("service_notification", getString(R.string.not_channel_name), importance)
+            channel.description = getString(R.string.not_channel_des)
             // Register the channel with the system; you can't change the importance
             // or other notification behaviors after this
             val notificationManager = getSystemService(

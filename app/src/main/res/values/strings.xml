@@ -1,3 +1,35 @@
 <resources>
     <string name="app_name">Akira</string>
+    <string name="splScreenString">MADE WITH ❤ IN INDIA 🇮🇳</string>
+    <string name="enter_name">Enter your name</string>
+    <string name="em1">Emergency contact 1</string>
+    <string name="em2">Emergency contact 2</string>
+    <string name="em3">Emergency contact 3</string>
+    <string name="em_optional">* Emergency contact 2 and 3 are optional fields</string>
+    <string name="agree_to">I agree to </string>
+    <string name="tnc">T&amp;C</string>
+    <string name="pp">Privacy Policy</string>
+    <string name="and"> and </string>
+    <string name="save_details">SAVE DETAILS</string>
+    <string name="pls_keep_gps_note">Note: Please keep GPS ON \nwhen Protection mode is ON !</string>
+    <string name="protection">PROTECTION</string>
+    <string name="off">OFF</string>
+    <string name="on">ON</string>
+    <string name="terms_conditions">Terms and Conditions</string>
+    <string name="em_contacts">Emergency Contacts</string>
+    <string name="tutorial">Tutorial</string>
+    <string name="shake_tutorial">Shake the device up and down 3 times to send an SOS signal</string>
+    <string name="got_it">GOT IT</string>
+
+    <string name="not_channel_name">Background</string>
+    <string name="not_channel_des">Required for app to function in the background</string>
+    <string name="location_permission">Location permission</string>
+    <string name="location_permission_des">This permission is required to access Locaton service on your device.</string>
+    <string name="bg_location_permission">Background Location permission</string>
+    <string name="bg_location_permisssion_des">Allows the app to access this device\'s location in background. Necessary for the app to function.\n\n Note: If tapping the below button does not open the permissions dialog, manually provide permission by going to app permission settings and selecting \"Allow all the time\" for location permisssion</string>
+    <string name="sms_permission">SMS permission</string>
+    <string name="sms_permission_des">SMS permission is required to send SMS to your selected emergency contacts.</string>
+    <string name="fg_permission">Foreground Service permission</string>
+    <string name="fg_permission_des">Allows the app to run in background.</string>
+
 </resources>

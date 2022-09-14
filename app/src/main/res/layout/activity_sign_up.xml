@@ -35,7 +35,7 @@
         android:textSize="20sp"
         android:padding="10dp"
         android:ems="10"
-        android:hint="Enter your name"
+        android:hint="@string/enter_name"
         android:inputType="textPersonName" />
 
         <LinearLayout
@@ -62,7 +62,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:background="@drawable/edittext_layout"
-                android:hint="Emergency contact 1"
+                android:hint="@string/em1"
                 android:inputType="phone"
                 android:padding="10dp"
                 android:textSize="20sp" />
@@ -93,7 +93,7 @@
                 android:layout_height="wrap_content"
                 android:background="@drawable/edittext_layout"
                 android:ems="10"
-                android:hint="Emergency contact 2"
+                android:hint="@string/em2"
                 android:inputType="phone"
                 android:padding="10dp"
                 android:textSize="20sp" />
@@ -124,7 +124,7 @@
                 android:layout_height="wrap_content"
                 android:background="@drawable/edittext_layout"
                 android:ems="10"
-                android:hint="Emergency contact 3"
+                android:hint="@string/em3"
                 android:inputType="phone"
                 android:padding="10dp"
                 android:textSize="20sp" />
@@ -135,7 +135,7 @@
             android:layout_marginTop="10dp"
             android:paddingStart="6dp"
             android:textColor="@color/red"
-            android:text="* Emergency contact 2 and 3 are optional fields"
+            android:text="@string/em_optional"
             android:textSize="20sp"/>
     </LinearLayout>
 
@@ -144,7 +144,7 @@
         android:backgroundTint="@color/black"
         android:layout_width="0dp"
         android:layout_height="60dp"
-        android:text="Save Details"
+        android:text="@string/save_details"
         android:enabled="false"
         android:textColor="@color/white"
         android:layout_marginStart="20dp"
@@ -170,14 +170,14 @@
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="I agree to "
+            android:text="@string/agree_to"
             android:textSize="18sp" />
 
         <TextView
             android:id="@+id/tncTextView"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="T&amp;C"
+            android:text="@string/tnc"
             android:textSize="18sp"
             android:textColor="@color/blue"
             android:textStyle="bold" />
@@ -186,13 +186,13 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:textSize="18sp"
-            android:text=" and " />
+            android:text="@string/and" />
 
         <TextView
             android:id="@+id/privacyPolicyTextView"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="Privacy Policy"
+            android:text="@string/pp"
             android:textSize="18sp"
             android:textColor="@color/blue"
             android:textStyle="bold" />

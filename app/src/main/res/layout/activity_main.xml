@@ -44,7 +44,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_gravity="center_horizontal"
-            android:text="PROTECTION"
+            android:text="@string/protection"
             android:paddingBottom="4dp"
             android:textColor="@color/black"
             android:textSize="24sp" />
@@ -54,7 +54,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_gravity="center_horizontal"
-            android:text="OFF"
+            android:text="@string/off"
             android:textColor="@color/white"
             android:textSize="24sp"
             android:textStyle="bold" />
@@ -66,7 +66,7 @@
        android:layout_height="wrap_content"
        android:textAlignment="center"
        app:layout_constraintTop_toBottomOf="@+id/material_button"
-       android:text="Note: Please keep GPS ON \nwhen Protection mode is ON !"
+       android:text="@string/pls_keep_gps_note"
        android:textSize="18sp"
        android:layout_marginTop="20dp"
        app:layout_constraintLeft_toLeftOf="parent"

@@ -21,7 +21,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginBottom="30dp"
-        android:text="MADE WITH ❤ IN INDIA 🇮🇳"
+        android:text="@string/splScreenString"
         android:textColor="@color/black"
         android:textSize="18sp"
         android:textStyle="bold"
