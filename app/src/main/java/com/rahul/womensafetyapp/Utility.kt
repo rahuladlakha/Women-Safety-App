@@ -3,9 +3,9 @@ package com.rahul.womensafetyapp
 
 import android.Manifest
 import android.content.Context
-import android.content.Context.LOCATION_SERVICE
 import android.content.DialogInterface
 import android.content.Intent
+import android.content.IntentSender
 import android.content.pm.PackageManager
 import android.content.res.ColorStateList
 import android.location.LocationManager
@@ -15,6 +15,9 @@ import androidx.appcompat.app.AppCompatActivity
 import androidx.core.app.ActivityCompat
 import androidx.core.content.ContextCompat
 import androidx.core.content.ContextCompat.getSystemService
+import com.google.android.gms.common.api.ResolvableApiException
+import com.google.android.gms.location.*
+import com.google.android.gms.tasks.Task
 import kotlinx.android.synthetic.main.activity_main.*
 
 
@@ -85,6 +88,57 @@ fun enableProtection(activity: AppCompatActivity,b : Boolean){
 
 fun enableGPS(activity: AppCompatActivity){
     val mLocationManager: LocationManager = getSystemService(activity, LocationManager::class.java) as LocationManager
-    if (!mLocationManager.isProviderEnabled(LocationManager.GPS_PROVIDER))
-        Toast.makeText(activity, "Please turn GPS on",Toast.LENGTH_LONG).show()
+    if (!mLocationManager.isProviderEnabled(LocationManager.GPS_PROVIDER)) {
+        //If GPS is disabled, enable it
+        AlertDialog.Builder(activity)
+            .setIcon(R.drawable.ic_info_outline)
+            .setTitle("Please enable GPS !")
+            .setMessage("GPS must be enabled when Protection Mode is on for the app to function properly. Kindly enable GPS !")
+            .setPositiveButton("Enable GPS", object : DialogInterface.OnClickListener{
+                override fun onClick(p0: DialogInterface?, p1: Int) {
+                    //if location is not enabled, enable it
+                    val locationRequest = LocationRequest.create().apply {
+                        interval = 10000
+                        fastestInterval = 5000
+                        priority = LocationRequest.PRIORITY_HIGH_ACCURACY
+                    }
+
+                    val builder = LocationSettingsRequest.Builder()
+                        .addLocationRequest(locationRequest)
+
+                    val client: SettingsClient = LocationServices.getSettingsClient(activity)
+                    val task: Task<LocationSettingsResponse> = client.checkLocationSettings(builder.build())
+
+                    task.addOnSuccessListener { locationSettingsResponse ->
+                        // All location settings are satisfied. The client can initialize
+                        // location requests here.
+                        // ...
+                        val state = locationSettingsResponse.locationSettingsStates
+
+                        val label =
+                            "GPS >> (Present: ${state?.isGpsPresent}  | Usable: ${state?.isGpsUsable} ) \n\n" +
+                                    "Network >> ( Present: ${state?.isNetworkLocationPresent} | Usable: ${state?.isNetworkLocationUsable} ) \n\n" +
+                                    "Location >> ( Present: ${state?.isLocationPresent} | Usable: ${state?.isLocationUsable} )"
+                    }
+
+                    task.addOnFailureListener { exception ->
+                        if (exception is ResolvableApiException) {
+                            // Location settings are not satisfied, but this can be fixed
+                            // by showing the user a dialog.
+                            try {
+                                // Show the dialog by calling startResolutionForResult(),
+                                // and check the result in onActivityResult().
+                                exception.startResolutionForResult(
+                                    activity,
+                                    100
+                                )
+                            } catch (sendEx: IntentSender.SendIntentException) {
+                                // Ignore the error.
+                            }
+                        }
+
+                    }
+                }
+            }).show()
+    }
 }
