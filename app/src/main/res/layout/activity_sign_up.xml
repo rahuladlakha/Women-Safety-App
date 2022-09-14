@@ -145,6 +145,7 @@
         android:layout_width="0dp"
         android:layout_height="60dp"
         android:text="Save Details"
+        android:enabled="false"
         android:textColor="@color/white"
         android:layout_marginStart="20dp"
         android:layout_marginEnd="20dp"
@@ -152,6 +153,50 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintBottom_toBottomOf="parent"/>
+
+    <LinearLayout
+        android:id="@+id/tncLinearLayout"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        app:layout_constraintBottom_toTopOf="@+id/saveButton"
+        app:layout_constraintLeft_toLeftOf="@id/saveButton">
+
+        <CheckBox
+            android:id="@+id/tncCheckBox"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content" />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="I agree to "
+            android:textSize="18sp" />
+
+        <TextView
+            android:id="@+id/tncTextView"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="T&amp;C"
+            android:textSize="18sp"
+            android:textColor="@color/blue"
+            android:textStyle="bold" />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textSize="18sp"
+            android:text=" and " />
+
+        <TextView
+            android:id="@+id/privacyPolicyTextView"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Privacy Policy"
+            android:textSize="18sp"
+            android:textColor="@color/blue"
+            android:textStyle="bold" />
+    </LinearLayout>
 
 
 </androidx.constraintlayout.widget.ConstraintLayout>

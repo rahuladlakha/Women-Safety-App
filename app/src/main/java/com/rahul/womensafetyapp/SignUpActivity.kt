@@ -8,17 +8,29 @@ import android.os.Bundle
 import android.text.Editable
 import android.util.Log
 import android.view.View
+import android.widget.CompoundButton
 import android.widget.TextView
 import android.widget.Toast
 import kotlinx.android.synthetic.main.activity_sign_up.*
 
 class SignUpActivity : AppCompatActivity() {
     lateinit var sp : SharedPreferences
+    var origin: String? = null
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_sign_up)
         supportActionBar?.hide()
+
+        tncCheckBox.setOnCheckedChangeListener{button:CompoundButton?, state : Boolean ->
+            saveButton.isEnabled = state
+        }
+        tncTextView.setOnClickListener {
+            Toast.makeText(this@SignUpActivity,"tncclicked",Toast.LENGTH_SHORT).show()
+        }
+        privacyPolicyTextView.setOnClickListener {
+            Toast.makeText(this@SignUpActivity,"ppclicked",Toast.LENGTH_SHORT).show()
+        }
 
         sp = this@SignUpActivity.getSharedPreferences("com.rahul.womenSafetyApp", Context.MODE_PRIVATE)
         val name = sp.getString("user name", "")
@@ -27,6 +39,11 @@ class SignUpActivity : AppCompatActivity() {
             startActivity(Intent(this@SignUpActivity, MainActivity::class.java))
             this@SignUpActivity.finish()
         } else if (intent.getStringExtra("origin") == "MainActivity") {
+
+            origin = "MainActivity"
+            tncLinearLayout.visibility = View.GONE
+            saveButton.isEnabled = true
+
             NameEditText.setText(name, TextView.BufferType.EDITABLE)
             val codes = sp.getString("countryCodes", null)?.trim()?.split("*")
             if (codes != null) {
@@ -69,7 +86,9 @@ class SignUpActivity : AppCompatActivity() {
                     .putString("countryCodes", "${countryCodes[0]}*${countryCodes[1]}*${countryCodes[2]}")
                     .apply()
 
-                startActivity(Intent(this@SignUpActivity, MainActivity::class.java))
+                if (origin  == null){
+                    startActivity(Intent(this@SignUpActivity, MainActivity::class.java))
+                }
                 this@SignUpActivity.finish()
             }
         })
