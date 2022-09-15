@@ -9,12 +9,14 @@ import android.content.IntentSender
 import android.content.pm.PackageManager
 import android.content.res.ColorStateList
 import android.location.LocationManager
+import android.net.Uri
 import android.widget.Toast
 import androidx.appcompat.app.AlertDialog
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.app.ActivityCompat
 import androidx.core.content.ContextCompat
 import androidx.core.content.ContextCompat.getSystemService
+import androidx.core.content.ContextCompat.startActivity
 import com.google.android.gms.common.api.ResolvableApiException
 import com.google.android.gms.location.*
 import com.google.android.gms.tasks.Task
@@ -86,15 +88,16 @@ fun enableProtection(activity: AppCompatActivity,b : Boolean){
     }
 }
 
-fun enableGPS(activity: AppCompatActivity){
-    val mLocationManager: LocationManager = getSystemService(activity, LocationManager::class.java) as LocationManager
+fun enableGPS(activity: AppCompatActivity) {
+    val mLocationManager: LocationManager =
+        getSystemService(activity, LocationManager::class.java) as LocationManager
     if (!mLocationManager.isProviderEnabled(LocationManager.GPS_PROVIDER)) {
         //If GPS is disabled, enable it
         AlertDialog.Builder(activity)
             .setIcon(R.drawable.ic_info_outline)
             .setTitle("Please enable GPS !")
             .setMessage("GPS must be enabled when Protection Mode is on for the app to function properly. Kindly enable GPS !")
-            .setPositiveButton("Enable GPS", object : DialogInterface.OnClickListener{
+            .setPositiveButton("Enable GPS", object : DialogInterface.OnClickListener {
                 override fun onClick(p0: DialogInterface?, p1: Int) {
                     //if location is not enabled, enable it
                     val locationRequest = LocationRequest.create().apply {
@@ -107,7 +110,8 @@ fun enableGPS(activity: AppCompatActivity){
                         .addLocationRequest(locationRequest)
 
                     val client: SettingsClient = LocationServices.getSettingsClient(activity)
-                    val task: Task<LocationSettingsResponse> = client.checkLocationSettings(builder.build())
+                    val task: Task<LocationSettingsResponse> =
+                        client.checkLocationSettings(builder.build())
 
                     task.addOnSuccessListener { locationSettingsResponse ->
                         // All location settings are satisfied. The client can initialize
@@ -142,3 +146,10 @@ fun enableGPS(activity: AppCompatActivity){
             }).show()
     }
 }
+fun openLink(activity :AppCompatActivity,uri : Uri) {
+    //This fun will be used to open privacy policy and terms and conditions
+    val intent = Intent(Intent.ACTION_VIEW)
+    intent.setData(uri)
+    activity.startActivity(intent)
+}
+

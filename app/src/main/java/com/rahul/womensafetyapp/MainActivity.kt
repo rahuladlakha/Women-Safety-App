@@ -11,6 +11,7 @@ import android.hardware.Sensor
 import android.hardware.SensorEvent
 import android.hardware.SensorEventListener
 import android.hardware.SensorManager
+import android.net.Uri
 import android.os.Build
 import android.os.Bundle
 import android.util.Log
@@ -73,13 +74,14 @@ class MainActivity : AppCompatActivity() {
 
     override fun onOptionsItemSelected(item: MenuItem): Boolean {
         when (item.itemId){
-            R.id.tutorial_item -> {
+            R.id.tutorial_item ->
                 startActivity(Intent(this,TutorialActivity::class.java))
-            }
-            R.id.policy_item ->{}
-            R.id.emergeny_contacts_item -> {
+            R.id.tnc_item ->
+                openLink(this, Uri.parse("https://akira-app.blogspot.com/2022/09/terms-and-conditions-akira-mobile.html"))
+            R.id.policy_item ->
+                openLink(this, Uri.parse("https://akira-app.blogspot.com/2022/09/privacy-policy-akira-mobile-application.html"))
+            R.id.emergeny_contacts_item ->
                 startActivity(Intent(this,SignUpActivity::class.java).putExtra("origin","MainActivity"))
-            }
         }
         return super.onOptionsItemSelected(item)
     }

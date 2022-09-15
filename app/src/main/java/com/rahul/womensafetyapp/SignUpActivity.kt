@@ -3,6 +3,7 @@ package com.rahul.womensafetyapp
 import android.content.Context
 import android.content.Intent
 import android.content.SharedPreferences
+import android.net.Uri
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.text.Editable
@@ -26,10 +27,10 @@ class SignUpActivity : AppCompatActivity() {
             saveButton.isEnabled = state
         }
         tncTextView.setOnClickListener {
-            Toast.makeText(this@SignUpActivity,"tncclicked",Toast.LENGTH_SHORT).show()
+            openLink(this, Uri.parse("https://akira-app.blogspot.com/2022/09/terms-and-conditions-akira-mobile.html"))
         }
         privacyPolicyTextView.setOnClickListener {
-            Toast.makeText(this@SignUpActivity,"ppclicked",Toast.LENGTH_SHORT).show()
+            openLink(this, Uri.parse("https://akira-app.blogspot.com/2022/09/privacy-policy-akira-mobile-application.html"))
         }
 
         sp = this@SignUpActivity.getSharedPreferences("com.rahul.womenSafetyApp", Context.MODE_PRIVATE)
