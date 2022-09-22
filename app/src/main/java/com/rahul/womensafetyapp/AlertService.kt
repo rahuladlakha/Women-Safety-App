@@ -53,7 +53,7 @@ class AlertService : Service() {
             val contacts : List<String> = (sp.getString("emergency contacts", " ") ?: " ").trim().split("*")
             val codes = sp.getString("countryCodes","")?.trim()?.split("*")
 
-            var smsDes = "HELP!\nThis SMS was sent from Women safety app to you since you are an emergency contact in this user's contact list. Kindly call this contact soon."
+            var smsDes = "HELP!\nThis SMS was sent from Akira app to you since you are an emergency contact in this user's contact list. Kindly call this contact soon."
             for (i in 0..(contacts.size-1))
                 if (codes != null && contacts[i] != null && !contacts[i].trim().isEmpty() ) {
                     smsManager.sendTextMessage(
