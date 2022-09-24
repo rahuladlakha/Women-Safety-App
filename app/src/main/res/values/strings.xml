@@ -6,10 +6,10 @@
     <string name="em2">Emergency contact 2</string>
     <string name="em3">Emergency contact 3</string>
     <string name="em_optional">* Emergency contact 2 and 3 are optional fields</string>
-    <string name="agree_to">I agree to </string>
+    <string name="agree_to">I agree to&#160;</string>
     <string name="tnc">T&amp;C</string>
     <string name="pp">Privacy Policy</string>
-    <string name="and"> and </string>
+    <string name="and">&#160;and&#160;</string>
     <string name="save_details">SAVE DETAILS</string>
     <string name="pls_keep_gps_note">Note: Please keep GPS ON \nwhen Protection mode is ON !</string>
     <string name="protection">PROTECTION</string>
@@ -31,19 +31,18 @@
     <string name="fg_permission">Foreground Service permission</string>
     <string name="fg_permission_des">Allows the app to run in background.</string>
     <string name="sel_allow_all_the_time">Select \"Allow all the time\" in Location Permissions</string>
-    <string name="please_provide_the">Please provide the </string>
+    <string name="please_provide_the">Please provide the&#160;</string>
     <string name="proceed_to_grant">Proceed to grant</string>
     <string name="enable_gps_dialog_des">GPS must be enabled when Protection Mode is on for the app to function properly. Kindly enable GPS !</string>
     <string name="enable_gps_dialog_title">Please enable GPS !</string>
     <string name="enable_gps_dialog_button">Enable GPS</string>
     <string name="em_ges_detected">Emergency gesture was detected!</string>
     <string name="sos_des">HELP!\nThis SMS was sent from Akira app to you since you are an emergency contact in this user\'s contact list. Kindly call this contact soon.</string>
-    <string name="sendind_sos_to">Sending SOS to emergency contact : </string>
-    <string name="sending_loc_to">Sending location to emergency contact: </string>
-    <string name="user_loc_is">User\'s current location is :  </string>
+    <string name="sendind_sos_to">Sending SOS to emergency contact :&#160;</string>
+    <string name="sending_loc_to">Sending location to emergency contact :&#160;</string>
+    <string name="user_loc_is">User\'s current location is:</string>
     <string name="not_title">Protection is ON</string>
     <string name="not_des">Shake the device vertically 3 times to send SOS</string>
-
     <string name="name_cant_empty">Name field cannot be empty!</string>
     <string name="provide_atleast_one_em">Please provide atleast one emergency contact !</string>
 

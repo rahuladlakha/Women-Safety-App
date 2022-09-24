@@ -22,16 +22,6 @@ import com.google.android.gms.location.*
 import com.google.android.gms.tasks.Task
 import kotlinx.android.synthetic.main.activity_main.*
 
-
-//class UserData {
-//    val sp : SharedPreferences
-//    init {
-//        this.sp = this.getSharedPreferences("com.rahul.womenSafetyApp", Context.MODE_PRIVATE);
-//    }
-//    companion object {
-//        val name : String
-//    }
-//}
 private val permissions = arrayOf( Manifest.permission.ACCESS_FINE_LOCATION ,
     Manifest.permission.ACCESS_COARSE_LOCATION ,
     Manifest.permission.ACCESS_BACKGROUND_LOCATION, Manifest.permission.SEND_SMS, Manifest.permission.FOREGROUND_SERVICE
@@ -42,11 +32,6 @@ private val permissionDes = arrayOf(
     R.string.bg_location_permission to R.string.bg_location_permisssion_des,
     R.string.sms_permission to R.string.sms_permission_des,
     R.string.fg_permission to R.string.fg_permission_des
-//    "Location permission" to "This permission is required to access Locaton service on your device.",
-//    "Location permission" to "This permission is required to access Locaton service on your device.",
-//    "Background Location permission" to "Allows the app to access this device's location in background. Necessary for the app to function.\n\n Note: If tapping the below button doesn't open the permissions dialog, manually provide permission by going to app permission settings and selecting \"Allow all the time\" for location permisssion",
-//    "SMS permission" to "SMS permission is required to send SMS to your selected emergency contacts.",
-//    "Foreground Service permission" to "Allows the app to run in background."
 )
 
 fun checkIfPermissionsGranted(activity: AppCompatActivity) : Boolean =
@@ -63,12 +48,6 @@ fun checkPermissions( activity: AppCompatActivity) {
                 override fun onClick(p0: DialogInterface?, p1: Int) {
                     if (permissions[perIndex] == Manifest.permission.ACCESS_BACKGROUND_LOCATION) {
                         Toast.makeText(activity, activity.getString(R.string.sel_allow_all_the_time), Toast.LENGTH_LONG).show()
-//                         if (activity.shouldShowRequestPermissionRationale(permissions[perIndex]))
-//                             activity.startActivity(
-//                                Intent().setAction(Settings.ACTION_APPLICATION_DETAILS_SETTINGS)
-//                                    .setData(Uri.fromParts("package", activity.packageName, null))
-//                            )
-//
                     }
                     ActivityCompat.requestPermissions(activity, arrayOf(permissions[perIndex]), perIndex)
                 }
@@ -79,7 +58,6 @@ fun checkPermissions( activity: AppCompatActivity) {
     val i = permissions.indexOfFirst { ContextCompat.checkSelfPermission(activity, it) != PackageManager.PERMISSION_GRANTED }
     if (i in 0..(permissions.size-1) )
         requestPermission(i)
-        // ActivityCompat.requestPermissions(activity, arrayOf(permissions[i]), i)
 }
 
 fun enableProtection(activity: AppCompatActivity,b : Boolean){
