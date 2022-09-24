@@ -20,7 +20,6 @@
     <string name="tutorial">Tutorial</string>
     <string name="shake_tutorial">Shake the device up and down 3 times to send an SOS signal</string>
     <string name="got_it">GOT IT</string>
-
     <string name="not_channel_name">Background</string>
     <string name="not_channel_des">Required for app to function in the background</string>
     <string name="location_permission">Location permission</string>
@@ -31,5 +30,21 @@
     <string name="sms_permission_des">SMS permission is required to send SMS to your selected emergency contacts.</string>
     <string name="fg_permission">Foreground Service permission</string>
     <string name="fg_permission_des">Allows the app to run in background.</string>
+    <string name="sel_allow_all_the_time">Select \"Allow all the time\" in Location Permissions</string>
+    <string name="please_provide_the">Please provide the </string>
+    <string name="proceed_to_grant">Proceed to grant</string>
+    <string name="enable_gps_dialog_des">GPS must be enabled when Protection Mode is on for the app to function properly. Kindly enable GPS !</string>
+    <string name="enable_gps_dialog_title">Please enable GPS !</string>
+    <string name="enable_gps_dialog_button">Enable GPS</string>
+    <string name="em_ges_detected">Emergency gesture was detected!</string>
+    <string name="sos_des">HELP!\nThis SMS was sent from Akira app to you since you are an emergency contact in this user\'s contact list. Kindly call this contact soon.</string>
+    <string name="sendind_sos_to">Sending SOS to emergency contact : </string>
+    <string name="sending_loc_to">Sending location to emergency contact: </string>
+    <string name="user_loc_is">User\'s current location is :  </string>
+    <string name="not_title">Protection is ON</string>
+    <string name="not_des">Shake the device vertically 3 times to send SOS</string>
+
+    <string name="name_cant_empty">Name field cannot be empty!</string>
+    <string name="provide_atleast_one_em">Please provide atleast one emergency contact !</string>
 
 </resources>

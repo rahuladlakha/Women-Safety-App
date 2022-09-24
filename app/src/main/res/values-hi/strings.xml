@@ -21,7 +21,6 @@
     <string name="tutorial">ट्यूटोरियल</string>
     <string name="shake_tutorial">एस.ओ.एस. संकेत भेजने के लिए डिवाइस को 3 बार ऊपर और नीचे हिलाएं।</string>
     <string name="got_it">समझ गया</string>
-
     <string name="not_channel_name">बैकग्राउंड</string>
     <string name="not_channel_des">ऐप को बैकग्राउंड में काम करने के लिए जरूरी है</string>
     <string name="location_permission">स्थान की अनुमति</string>
@@ -32,5 +31,19 @@
     <string name="sms_permission_des">आपके चयनित आपातकालीन संपर्कों को एस.एम.एस. भेजने के लिए एस.एम.एस. अनुमति की आवश्यकता है।</string>
     <string name="fg_permission">अग्रभूमि सेवा की अनुमति</string>
     <string name="fg_permission_des">ऐप्लिकेशन को बैकग्राउंड में चलने देता है</string>
-
+    <string name="sel_allow_all_the_time">स्थान अनुमतियों में \"हमेशा के लिए अनुमति दे\" चुनें</string>
+    <string name="please_provide_the">कृपया प्रदान करें </string>
+    <string name="proceed_to_grant">अनुदान के लिए आगे बढ़ें</string>
+    <string name="enable_gps_dialog_des">ऐप के ठीक से काम करने के लिए सुरक्षा मोड चालू होने पर जी.पी.एस. सक्षम होना चाहिए। कृपया जी.पी.एस. सक्षम करें!</string>
+    <string name="enable_gps_dialog_title">कृपया जी.पी.एस. सक्षम करें!</string>
+    <string name="enable_gps_dialog_button">जी.पी.एस. सक्षम करें!</string>
+    <string name="em_ges_detected">आपातकालीन हावभाव का पता चला!</string>
+    <string name="sos_des">मदद!\nयह एस.एम.एस. आपको अकीरा ऐप से भेजा गया था क्योंकि आप इस उपयोगकर्ता की संपर्क सूची में एक आपातकालीन संपर्क हैं। कृपया इस संपर्क को शीघ्र ही कॉल करें।</string>
+    <string name="sendind_sos_to">आपातकालीन संपर्क को एस.ओ.एस. भेजा जा रहा है:</string>
+    <string name="sending_loc_to">आपातकालीन संपर्क को स्थान भेजा जा रहा है: </string>
+    <string name="user_loc_is">उपयोगकर्ता का वर्तमान स्थान है: </string>
+    <string name="not_title">सुरक्षा चालू है</string>
+    <string name="not_des">एसओएस भेजने के लिए डिवाइस को 3 बार ऊपर और नीचे हिलाएं</string>
+    <string name="name_cant_empty">नाम क्षेत्र खाली नहीं हो सकता!</string>
+    <string name="provide_atleast_one_em">कृपया कम से कम एक आपातकालीन संपर्क प्रदान करें!</string>
 </resources>

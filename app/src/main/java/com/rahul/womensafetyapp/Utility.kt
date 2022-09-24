@@ -57,12 +57,12 @@ fun checkPermissions( activity: AppCompatActivity) {
     fun requestPermission( perIndex : Int){
         AlertDialog.Builder(activity)
             .setIcon(R.drawable.ic_info_outline)
-            .setTitle("Please provide the ${activity.getString(permissionDes[perIndex].first)}")
+            .setTitle("${activity.getString(R.string.please_provide_the)}${activity.getString(permissionDes[perIndex].first)}")
             .setMessage(activity.getString(permissionDes[perIndex].second))
-            .setPositiveButton("Proceed to grant", object : DialogInterface.OnClickListener{
+            .setPositiveButton(activity.getString(R.string.proceed_to_grant), object : DialogInterface.OnClickListener{
                 override fun onClick(p0: DialogInterface?, p1: Int) {
                     if (permissions[perIndex] == Manifest.permission.ACCESS_BACKGROUND_LOCATION) {
-                        Toast.makeText(activity, "Select \"Allow all the time\" in Location Permissions", Toast.LENGTH_LONG).show()
+                        Toast.makeText(activity, activity.getString(R.string.sel_allow_all_the_time), Toast.LENGTH_LONG).show()
 //                         if (activity.shouldShowRequestPermissionRationale(permissions[perIndex]))
 //                             activity.startActivity(
 //                                Intent().setAction(Settings.ACTION_APPLICATION_DETAILS_SETTINGS)
@@ -100,9 +100,9 @@ fun enableGPS(activity: AppCompatActivity) {
         //If GPS is disabled, enable it
         AlertDialog.Builder(activity)
             .setIcon(R.drawable.ic_info_outline)
-            .setTitle("Please enable GPS !")
-            .setMessage("GPS must be enabled when Protection Mode is on for the app to function properly. Kindly enable GPS !")
-            .setPositiveButton("Enable GPS", object : DialogInterface.OnClickListener {
+            .setTitle(activity.getString(R.string.enable_gps_dialog_title))
+            .setMessage(activity.getString(R.string.enable_gps_dialog_des))
+            .setPositiveButton(activity.getString(R.string.enable_gps_dialog_button), object : DialogInterface.OnClickListener {
                 override fun onClick(p0: DialogInterface?, p1: Int) {
                     //if location is not enabled, enable it
                     val locationRequest = LocationRequest.create().apply {

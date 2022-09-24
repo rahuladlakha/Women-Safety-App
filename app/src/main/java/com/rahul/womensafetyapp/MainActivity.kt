@@ -39,6 +39,7 @@ class MainActivity : AppCompatActivity() {
         setContentView(R.layout.activity_main)
         supportActionBar?.title = null
 
+        AlertService.mainActivity = this
         material_button.setOnClickListener(object : View.OnClickListener{
             override fun onClick(p0: View?) {
                 enableProtection(this@MainActivity, protectionStatus.text != getString(R.string.on))

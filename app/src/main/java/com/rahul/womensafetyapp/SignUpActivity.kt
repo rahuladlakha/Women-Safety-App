@@ -70,14 +70,14 @@ class SignUpActivity : AppCompatActivity() {
                 if (name.isEmpty()) {
                         Toast.makeText(
                             this@SignUpActivity,
-                            "Name field can't be empty!",
+                            getString(R.string.name_cant_empty),
                             Toast.LENGTH_SHORT
                         ).show()
                         return
                 } else if (emContacts[0].isEmpty()) {
                         Toast.makeText(
                             this@SignUpActivity,
-                            "Please provide atleast one emergency contact !",
+                            getString(R.string.provide_atleast_one_em),
                             Toast.LENGTH_SHORT
                         ).show()
                         return

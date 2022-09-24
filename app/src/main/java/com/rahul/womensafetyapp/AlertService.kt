@@ -21,6 +21,7 @@ import android.os.Looper
 import android.telephony.SmsManager
 import android.util.Log
 import android.widget.Toast
+import androidx.appcompat.app.AppCompatActivity
 import androidx.core.app.ActivityCompat
 import androidx.core.app.NotificationCompat
 import com.google.android.gms.location.FusedLocationProviderClient
@@ -37,6 +38,7 @@ class AlertService : Service() {
     lateinit var smsManager: SmsManager
     companion object {
         var isServiceRunning = false;
+        var mainActivity: AppCompatActivity? = null;
     }
     private var shake = 0
     private var lastShakeTime = 0L
@@ -47,13 +49,13 @@ class AlertService : Service() {
     private fun detectThriceShake(){
         // Toast.makeText(this, "Shake was detected", Toast.LENGTH_SHORT).show()
         if (shake >= 5){
-            Toast.makeText(this, "Emergency gesture was detected" , Toast.LENGTH_SHORT).show()
+            Toast.makeText(this, mainActivity?.getString(R.string.em_ges_detected)?:"Emergency gesture was detected!", Toast.LENGTH_SHORT).show()
             val sp = this.getSharedPreferences("com.rahul.womenSafetyApp", Context.MODE_PRIVATE);
             val name = sp.getString("user name", " ")?: " "
             val contacts : List<String> = (sp.getString("emergency contacts", " ") ?: " ").trim().split("*")
             val codes = sp.getString("countryCodes","")?.trim()?.split("*")
 
-            var smsDes = "HELP!\nThis SMS was sent from Akira app to you since you are an emergency contact in this user's contact list. Kindly call this contact soon."
+            var smsDes = mainActivity?.getString(R.string.sos_des)?:"HELP!\nThis SMS was sent from Akira app to you since you are an emergency contact in this user's contact list. Kindly call this contact soon."
             for (i in 0..(contacts.size-1))
                 if (codes != null && contacts[i] != null && !contacts[i].trim().isEmpty() ) {
                     smsManager.sendTextMessage(
@@ -63,7 +65,7 @@ class AlertService : Service() {
                         null,
                         null
                     )
-                    Toast.makeText(this,"Sending SOS to emergency contact : ${codes[i]}${contacts[i]}",Toast.LENGTH_SHORT).show()
+                    Toast.makeText(this,(mainActivity?.getString(R.string.sendind_sos_to)?:"Sending SOS to emergency contact : ") + "${codes[i]}${contacts[i]}",Toast.LENGTH_SHORT).show()
                 }
             // Note that the maximum length for sending sms with sendTextMessage is 160 characters. If text exceeds this range no msg will be sent.
             //If the length is greater, we use sendMultiparttextMessage
@@ -102,14 +104,14 @@ class AlertService : Service() {
                     if (codes != null && contacts[i] != null && !contacts[i].trim().isEmpty() ) {
                         Toast.makeText(
                             this@AlertService,
-                            "Sending location to emergency contact: ${codes[i]}${contacts[i]}",
+                            (mainActivity?.getString(R.string.sending_loc_to)?:"Sending location to emergency contact: ")+"${codes[i]}${contacts[i]}",
                             Toast.LENGTH_SHORT
                         ).show()
 
                         smsManager.sendTextMessage(
                             "+${codes[i]}${contacts[i]}",
                             null,
-                            "User's current location is :  http://maps.google.com/maps?q=loc:${it?.latitude},${it?.longitude}",
+                            mainActivity?.getString(R.string.sos_des)?:"User's current location is : "+" http://maps.google.com/maps?q=loc:${it?.latitude},${it?.longitude}",
                             null,
                             null
                         )
@@ -175,8 +177,8 @@ class AlertService : Service() {
             }
 
         val notification : Notification = NotificationCompat.Builder(this, "service_notification")
-            .setContentTitle("Protection is ON")
-            .setContentText("Shake the device vertically 3 times to send SOS")
+            .setContentTitle(mainActivity?.getString(R.string.not_title)?:"Protection is ON")
+            .setContentText(mainActivity?.getString(R.string.not_des)?:"Shake the device vertically 3 times to send SOS")
             .setSmallIcon(R.drawable.ic_women_safety_app_outline)
             .setContentIntent(pendingIntent)
             .build()
