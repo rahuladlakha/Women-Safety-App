@@ -37,11 +37,11 @@ private val permissions = arrayOf( Manifest.permission.ACCESS_FINE_LOCATION ,
     Manifest.permission.ACCESS_BACKGROUND_LOCATION, Manifest.permission.SEND_SMS, Manifest.permission.FOREGROUND_SERVICE
  )
 private val permissionDes = arrayOf(
-    "Location permission" to "This permission is required to access Locaton service on your device.",
-    "Location permission" to "This permission is required to access Locaton service on your device.",
-    "Background Location permission" to "Allows the app to access this device's location in background. Necessary for the app to function.\n\n Note: If tapping the below button doesn't open the permissions dialog, manually provide permission by going to app permission settings and selecting \"Allow all the time\" for location permisssion",
-    "SMS permission" to "SMS permission is required to send SMS to your selected emergency contacts.",
-    "Foreground Service permission" to "Allows the app to run in background."
+    "Location permission" to "This permission is required to access Locaton service on your device. The location is required to be sent with the SOS message to your emergency contacts so they know your location.",
+    "Location permission" to "This permission is required to access Locaton service on your device.The location is required to be sent with the SOS message to your emergency contacts so they know your location.",
+    "Background Location permission" to "Allows the app to access this device's location when the app is running in background or is not in use. This will allow the app to share your location with your emergency contacts when the app is running in background or is not in use. \nWE NEVER STORE YOUR LOCATION ANYWHERE.\n\n Note: If tapping the below button doesn't open the permissions dialog, manually provide permission by going to app permission settings and selecting \"Allow all the time\" for location permisssion",
+    "SMS permission" to "The app requires SMS permission to be able to send SMS to your selected emergency contacts.\n\nPlease note that you may be charged by your network operator for sending SMS as per tariff plans in your area",
+    "Foreground Service permission" to "This permission allows the app to run in background to be able to detect emergency gesture and send SOS signals when the app is not in use."
 )
 
 fun checkIfPermissionsGranted(activity: AppCompatActivity) : Boolean =
@@ -54,6 +54,7 @@ fun checkPermissions( activity: AppCompatActivity) {
             .setIcon(R.drawable.ic_info_outline)
             .setTitle("Please provide the ${permissionDes[perIndex].first}")
             .setMessage(permissionDes[perIndex].second)
+            .setNegativeButton("Deny", null)
             .setPositiveButton("Proceed to grant", object : DialogInterface.OnClickListener{
                 override fun onClick(p0: DialogInterface?, p1: Int) {
                     if (permissions[perIndex] == Manifest.permission.ACCESS_BACKGROUND_LOCATION) {
@@ -96,7 +97,7 @@ fun enableGPS(activity: AppCompatActivity) {
         AlertDialog.Builder(activity)
             .setIcon(R.drawable.ic_info_outline)
             .setTitle("Please enable GPS !")
-            .setMessage("GPS must be enabled when Protection Mode is on for the app to function properly. Kindly enable GPS !")
+            .setMessage("GPS must be enabled when Protection Mode is on to allow the app to access this device's location. Your location is NOT stored anywhere and is only accessed when emergency gesture is detected. \nWe understand the sensitivity of these permissions and take best measures to protect your privacy.")
             .setPositiveButton("Enable GPS", object : DialogInterface.OnClickListener {
                 override fun onClick(p0: DialogInterface?, p1: Int) {
                     //if location is not enabled, enable it
