@@ -161,8 +161,8 @@ class AlertService : Service() {
         smsManager =  SmsManager.getDefault()
         val pendingIntent: PendingIntent =
             Intent(this, AlertService::class.java).let { notificationIntent ->
-                PendingIntent.getActivity(this, 0, notificationIntent, 0)
-            }
+                PendingIntent.getActivity(this, 0, notificationIntent, PendingIntent.FLAG_IMMUTABLE)
+            } //The app crashed here since android 12 required to set the flag to be either immutable or mutable for pending intents
 
         val notification : Notification = NotificationCompat.Builder(this, "service_notification")
             .setContentTitle(mainActivity?.getString(R.string.not_title)?:"Protection is ON")
