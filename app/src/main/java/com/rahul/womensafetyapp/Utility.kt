@@ -22,27 +22,16 @@ import com.google.android.gms.location.*
 import com.google.android.gms.tasks.Task
 import kotlinx.android.synthetic.main.activity_main.*
 
-
-//class UserData {
-//    val sp : SharedPreferences
-//    init {
-//        this.sp = this.getSharedPreferences("com.rahul.womenSafetyApp", Context.MODE_PRIVATE);
-//    }
-//    companion object {
-//        val name : String
-//    }
-//}
-private val permissions = arrayOf(
-    Manifest.permission.SEND_SMS, Manifest.permission.FOREGROUND_SERVICE, Manifest.permission.ACCESS_FINE_LOCATION ,
+private val permissions = arrayOf( Manifest.permission.ACCESS_FINE_LOCATION ,
     Manifest.permission.ACCESS_COARSE_LOCATION ,
-    Manifest.permission.ACCESS_BACKGROUND_LOCATION,
+    Manifest.permission.ACCESS_BACKGROUND_LOCATION, Manifest.permission.SEND_SMS, Manifest.permission.FOREGROUND_SERVICE
  )
 private val permissionDes = arrayOf(
-    "SMS permission" to "The app requires SMS permission to enable \"sending SOS message to your selected emergency contacts\".\n\nPlease note that you may be charged by your network operator for sending SMS as per tariff plans in your area",
-    "Foreground Service permission" to "This permission allows the app to run in background to be able to detect emergency gesture and send SOS signals when the app is not in use.",
-    "Location permission" to "Akira collects location data to enable \"tracking device's location\" even when the app is closed or not in use. Your location will only be shared with your own provided emergency contacts upon detection of emergency gesture. We NEVER store your location.",
-    "Location permission" to "Akira collects location data to enable \"tracking device's location\" even when the app is closed or not in use. Your location will only be shared with your own provided emergency contacts upon detection of emergency gesture. We NEVER store your location.",
-    "Background Location permission" to "Akira requires this permission to access this device's location when the app is running in background or is not in use.\nYour location will only be shared with your own provided emergency contacts upon detection of emergency gesture.\nWE NEVER STORE YOUR LOCATION.\n\n Note: If tapping the below button doesn't open the permissions dialog, manually provide permission by going to app permission settings and selecting \"Allow all the time\" for location permisssion"
+    R.string.location_permission to R.string.location_permission_des,
+    R.string.location_permission to R.string.location_permission_des,
+    R.string.bg_location_permission to R.string.bg_location_permisssion_des,
+    R.string.sms_permission to R.string.sms_permission_des,
+    R.string.fg_permission to R.string.fg_permission_des
 )
 
 fun checkIfPermissionsGranted(activity: AppCompatActivity) : Boolean =
@@ -53,19 +42,12 @@ fun checkPermissions( activity: AppCompatActivity) {
     fun requestPermission( perIndex : Int){
         AlertDialog.Builder(activity)
             .setIcon(R.drawable.ic_info_outline)
-            .setTitle("Please provide the ${permissionDes[perIndex].first}")
-            .setMessage(permissionDes[perIndex].second)
-            .setNegativeButton("Deny", null)
-            .setPositiveButton("Accept & grant", object : DialogInterface.OnClickListener{
+            .setTitle("${activity.getString(R.string.please_provide_the)}${activity.getString(permissionDes[perIndex].first)}")
+            .setMessage(activity.getString(permissionDes[perIndex].second))
+            .setPositiveButton(activity.getString(R.string.proceed_to_grant), object : DialogInterface.OnClickListener{
                 override fun onClick(p0: DialogInterface?, p1: Int) {
                     if (permissions[perIndex] == Manifest.permission.ACCESS_BACKGROUND_LOCATION) {
-                        Toast.makeText(activity, "Select \"Allow all the time\" in Location Permissions", Toast.LENGTH_LONG).show()
-//                         if (activity.shouldShowRequestPermissionRationale(permissions[perIndex]))
-//                             activity.startActivity(
-//                                Intent().setAction(Settings.ACTION_APPLICATION_DETAILS_SETTINGS)
-//                                    .setData(Uri.fromParts("package", activity.packageName, null))
-//                            )
-//
+                        Toast.makeText(activity, activity.getString(R.string.sel_allow_all_the_time), Toast.LENGTH_LONG).show()
                     }
                     ActivityCompat.requestPermissions(activity, arrayOf(permissions[perIndex]), perIndex)
                 }
@@ -76,12 +58,11 @@ fun checkPermissions( activity: AppCompatActivity) {
     val i = permissions.indexOfFirst { ContextCompat.checkSelfPermission(activity, it) != PackageManager.PERMISSION_GRANTED }
     if (i in 0..(permissions.size-1) )
         requestPermission(i)
-        // ActivityCompat.requestPermissions(activity, arrayOf(permissions[i]), i)
 }
 
 fun enableProtection(activity: AppCompatActivity,b : Boolean){
     activity.material_button.backgroundTintList = ColorStateList.valueOf(activity.getColor(if (b) R.color.green else R.color.red))
-    activity.protectionStatus.text = if (b) "ON" else "OFF"
+    activity.protectionStatus.text = if (b) activity.getString(R.string.on) else activity.getString(R.string.off)
     if (b) {
         activity.startForegroundService(Intent(activity, AlertService::class.java))
         enableGPS(activity)
@@ -97,9 +78,9 @@ fun enableGPS(activity: AppCompatActivity) {
         //If GPS is disabled, enable it
         AlertDialog.Builder(activity)
             .setIcon(R.drawable.ic_info_outline)
-            .setTitle("Please enable GPS !")
-            .setMessage("GPS must be enabled when Protection Mode is on to allow the app to access this device's location even when the app is closed or not in use. We NEVER store your location and only access your location when emergency gesture is detected. \nWe understand the sensitivity of these permissions and take best measures to protect your privacy.")
-            .setPositiveButton("Enable GPS", object : DialogInterface.OnClickListener {
+            .setTitle(activity.getString(R.string.enable_gps_dialog_title))
+            .setMessage(activity.getString(R.string.enable_gps_dialog_des))
+            .setPositiveButton(activity.getString(R.string.enable_gps_dialog_button), object : DialogInterface.OnClickListener {
                 override fun onClick(p0: DialogInterface?, p1: Int) {
                     //if location is not enabled, enable it
                     val locationRequest = LocationRequest.create().apply {

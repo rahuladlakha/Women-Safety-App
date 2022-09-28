@@ -69,6 +69,7 @@ class AlertService : Service() {
                 }
             // Note that the maximum length for sending sms with sendTextMessage is 160 characters. If text exceeds this range no msg will be sent.
             //If the length is greater, we use sendMultiparttextMessage
+            //Toast.makeText(this, contacts.toString(), Toast.LENGTH_SHORT).show()
 
             notificationTone.play()
             shake = 0
@@ -107,16 +108,27 @@ class AlertService : Service() {
                             Toast.LENGTH_SHORT
                         ).show()
 
-                        val smsDes = mainActivity?.getString(R.string.user_loc_is) ?: "User's current location is:"
                         smsManager.sendTextMessage(
                             "+${codes[i]}${contacts[i]}",
                             null,
-                            "$smsDes http://maps.google.com/maps?q=loc:${it?.latitude},${it?.longitude}",
+                            mainActivity?.getString(R.string.sos_des)?:"User's current location is : "+" http://maps.google.com/maps?q=loc:${it?.latitude},${it?.longitude}",
                             null,
                             null
                         )
                     }
+                // Note that the maximum length for sending sms with sendTextMessage is 160 characters. If text exceeds this range no msg will be sent.
+                //If the length is greater, we use sendMultiparttextMessage
+//                for (contact in contacts){
+//                    Log.i("Sending sms", "to ${contacts[0]}")
+//                    smsDes += " http://maps.google.com/maps?q=loc:${it?.latitude},${it?.longitude}"
+//                    val msgs = smsManager.divideMessage(smsDes) as ArrayList<String>
+//                    Log.i("SMSDes", smsDes)
+//                    smsManager.sendMultipartTextMessage("+918570962219", null, msgs, null, null)
+                    // Note that the maximum length for sending sms with sendTextMessage is 160 characters. If text exceeds this range no msg will be sent.
                 }
+//                Toast.makeText(this@AlertService, "Sms sent",Toast.LENGTH_SHORT).show()
+
+//                }
             }
         }
         if (Date().time - lastShakeTime < 800 || lastShakeTime == 0L){
