@@ -22,16 +22,18 @@ import com.google.android.gms.location.*
 import com.google.android.gms.tasks.Task
 import kotlinx.android.synthetic.main.activity_main.*
 
-private val permissions = arrayOf( Manifest.permission.ACCESS_FINE_LOCATION ,
+private val permissions = arrayOf(
+    Manifest.permission.SEND_SMS, Manifest.permission.FOREGROUND_SERVICE,
+    Manifest.permission.ACCESS_FINE_LOCATION ,
     Manifest.permission.ACCESS_COARSE_LOCATION ,
-    Manifest.permission.ACCESS_BACKGROUND_LOCATION, Manifest.permission.SEND_SMS, Manifest.permission.FOREGROUND_SERVICE
+    Manifest.permission.ACCESS_BACKGROUND_LOCATION
  )
 private val permissionDes = arrayOf(
-    R.string.location_permission to R.string.location_permission_des,
-    R.string.location_permission to R.string.location_permission_des,
-    R.string.bg_location_permission to R.string.bg_location_permisssion_des,
     R.string.sms_permission to R.string.sms_permission_des,
-    R.string.fg_permission to R.string.fg_permission_des
+    R.string.fg_permission to R.string.fg_permission_des,
+    R.string.location_permission to R.string.location_permission_des,
+    R.string.location_permission to R.string.location_permission_des,
+    R.string.bg_location_permission to R.string.bg_location_permisssion_des
 )
 
 fun checkIfPermissionsGranted(activity: AppCompatActivity) : Boolean =
@@ -44,7 +46,7 @@ fun checkPermissions( activity: AppCompatActivity) {
             .setIcon(R.drawable.ic_info_outline)
             .setTitle("${activity.getString(R.string.please_provide_the)}${activity.getString(permissionDes[perIndex].first)}")
             .setMessage(activity.getString(permissionDes[perIndex].second))
-            .setPositiveButton(activity.getString(R.string.proceed_to_grant), object : DialogInterface.OnClickListener{
+            .setPositiveButton(activity.getString(R.string.accept_and_grant), object : DialogInterface.OnClickListener{
                 override fun onClick(p0: DialogInterface?, p1: Int) {
                     if (permissions[perIndex] == Manifest.permission.ACCESS_BACKGROUND_LOCATION) {
                         Toast.makeText(activity, activity.getString(R.string.sel_allow_all_the_time), Toast.LENGTH_LONG).show()

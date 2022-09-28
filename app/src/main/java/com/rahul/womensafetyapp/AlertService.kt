@@ -97,8 +97,8 @@ class AlertService : Service() {
                     override fun isCancellationRequested(): Boolean = false
 
                 }).addOnSuccessListener {
-                Log.i("location", "${it?.longitude}, ${it?.latitude}")
                 if (it?.longitude == null || it?.latitude == null) return@addOnSuccessListener
+                Log.i("location", "${it?.longitude}, ${it?.latitude}")
 
                 for (i in 0..(contacts.size-1)) {
                     if (codes != null && contacts[i] != null && !contacts[i].trim().isEmpty() ) {
@@ -111,7 +111,7 @@ class AlertService : Service() {
                         smsManager.sendTextMessage(
                             "+${codes[i]}${contacts[i]}",
                             null,
-                            mainActivity?.getString(R.string.sos_des)?:"User's current location is : "+" http://maps.google.com/maps?q=loc:${it?.latitude},${it?.longitude}",
+                            ( mainActivity?.getString(R.string.user_loc_is)?:"Location: " )+"http://maps.google.com/maps?q=loc:${it?.latitude},${it?.longitude}",
                             null,
                             null
                         )
