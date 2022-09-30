@@ -1,0 +1,50 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="app_name">阿基拉</string>
+    <string name="splScreenString">&#160;</string>
+    <string name="enter_name">输入你的名字</string>
+    <string name="em1">紧急联络人 1</string>
+    <string name="em2">紧急联络人 2</string>
+    <string name="em3">紧急联络人 3</string>
+    <string name="em_optional">* 紧急联系人 2 和 3 是可选字段</string>
+    <string name="agree_to">我同意&#160;</string>
+    <string name="tnc">条款和条件</string>
+    <string name="pp">隐私政策</string>
+    <string name="and">&#160;和&#160;</string>
+    <string name="save_details">保存详细信息</string>
+    <string name="pls_keep_gps_note">注意：请在保护模式开启时保持定位服务开启！</string>
+    <string name="protection">保护方式</string>
+    <string name="off">模式已关闭</string>
+    <string name="on">模式开启</string>
+    <string name="terms_conditions">条款和条件</string>
+    <string name="em_contacts">紧急联络人</string>
+    <string name="tutorial">教程</string>
+    <string name="shake_tutorial">上下摇晃设备 3 次以发送紧急信号</string>
+    <string name="got_it">知道了</string>
+    <string name="not_channel_name">背景</string>
+    <string name="not_channel_des">应用程序需要在后台运行</string>
+    <string name="location_permission">位置许可</string>
+    <string name="location_permission_des">即使应用程序关闭或未使用，晃 也会收集位置数据以启用“跟踪设备的位置”。 只有在检测到紧急手势时，您的位置才会与您自己提供的紧急联系人共享。 我们从不存储您的位置。</string>
+    <string name="bg_location_permission">背景位置权限</string>
+    <string name="bg_location_permisssion_des">当应用程序在后台运行或未使用时，晃 需要此权限才能访问此设备的位置。您的位置只会在检测到紧急手势时与您自己提供的紧急联系人共享。 我们从不存储您的位置。 \n注意：如果点击以下按钮未打开权限对话框，请转到应用权限设置并为位置权限选择“始终允许”来手动提供权限</string>
+    <string name="sms_permission">留言权限</string>
+    <string name="sms_permission_des">该应用程序需要消息权限才能启用“向您选择的紧急联系人发送紧急消息”。 请注意，您的网络运营商可能会根据您所在地区的计划向您收取发送消息的费用</string>
+    <string name="fg_permission">前台服务权限</string>
+    <string name="fg_permission_des">此权限允许应用程序在后台运行，以便能够在应用程序未使用时检测紧急手势并发送紧急消息。</string>
+    <string name="sel_allow_all_the_time">在位置权限中选择“始终允许”</string>
+    <string name="please_provide_the">请提供&#160;</string>
+    <string name="accept_and_grant">接受并授予</string>
+    <string name="enable_gps_dialog_des">启用保护模式时必须启用定位服务，以允许应用程序访问此设备的位置，即使应用程序已关闭或未使用也是如此。 我们从不存储您的位置，仅在检测到紧急手势时访问您的位置。 我们了解这些权限的敏感性，并采取最佳措施保护您的隐私。</string>
+    <string name="enable_gps_dialog_title">请开启定位服务</string>
+    <string name="enable_gps_dialog_button">启用位置</string>
+    <string name="em_ges_detected">检测到紧急手势</string>
+    <string name="sos_des">帮助.. 此联系人可能存在风险。 请尽快致电此联系人。</string>
+    <string name="sendind_sos_to">向紧急联系人发送紧急消息：&#160;</string>
+    <string name="sending_loc_to">将位置发送给紧急联系人：&#160;</string>
+    <string name="user_loc_is">地方：&#160;</string>
+    <string name="not_title">保护模式开启</string>
+    <string name="not_des">垂直摇晃设备 3 次以发送紧急消息</string>
+    <string name="name_cant_empty">名称字段不能为空</string>
+    <string name="provide_atleast_one_em">请提供至少一名紧急联络人</string>
+
+</resources>
