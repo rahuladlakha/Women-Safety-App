@@ -12,7 +12,7 @@
     <string name="pp">隐私政策</string>
     <string name="and">&#160;和&#160;</string>
     <string name="save_details">保存详细信息</string>
-    <string name="pls_keep_gps_note">注意：请在保护模式开启时保持定位服务开启！</string>
+    <string name="pls_keep_gps_note">注意：请保持定位服务开启 \n开启保护模式时</string>
     <string name="protection">保护方式</string>
     <string name="off">模式已关闭</string>
     <string name="on">模式开启</string>
