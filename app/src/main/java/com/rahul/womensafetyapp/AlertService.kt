@@ -69,26 +69,18 @@ class AlertService : Service() {
                 }
             // Note that the maximum length for sending sms with sendTextMessage is 160 characters. If text exceeds this range no msg will be sent.
             //If the length is greater, we use sendMultiparttextMessage
-            //Toast.makeText(this, contacts.toString(), Toast.LENGTH_SHORT).show()
 
             notificationTone.play()
             shake = 0
-            if (ActivityCompat.checkSelfPermission(
-                    this,
+            if (ActivityCompat.checkSelfPermission(this,
                     Manifest.permission.ACCESS_FINE_LOCATION
                 ) != PackageManager.PERMISSION_GRANTED && ActivityCompat.checkSelfPermission(
                     this,
                     Manifest.permission.ACCESS_COARSE_LOCATION
                 ) != PackageManager.PERMISSION_GRANTED
             ) {
-                // TODO: Consider calling
-                //    ActivityCompat#requestPermissions
-                // here to request the missing permissions, and then overriding
-                //   public void onRequestPermissionsResult(int requestCode, String[] permissions,
-                //                                          int[] grantResults)
-                // to handle the case where the user grants the permission. See the documentation
-                // for ActivityCompat#requestPermissions for more details.
-                return
+                return //without the return statement here, below con't will give errors since we never checked for permissions
+                //before trying to access location
             }
             fusedLocationClient.getCurrentLocation(LocationRequest.PRIORITY_HIGH_ACCURACY,
                 object : CancellationToken() {
@@ -118,17 +110,7 @@ class AlertService : Service() {
                     }
                 // Note that the maximum length for sending sms with sendTextMessage is 160 characters. If text exceeds this range no msg will be sent.
                 //If the length is greater, we use sendMultiparttextMessage
-//                for (contact in contacts){
-//                    Log.i("Sending sms", "to ${contacts[0]}")
-//                    smsDes += " http://maps.google.com/maps?q=loc:${it?.latitude},${it?.longitude}"
-//                    val msgs = smsManager.divideMessage(smsDes) as ArrayList<String>
-//                    Log.i("SMSDes", smsDes)
-//                    smsManager.sendMultipartTextMessage("+918570962219", null, msgs, null, null)
-                    // Note that the maximum length for sending sms with sendTextMessage is 160 characters. If text exceeds this range no msg will be sent.
                 }
-//                Toast.makeText(this@AlertService, "Sms sent",Toast.LENGTH_SHORT).show()
-
-//                }
             }
         }
         if (Date().time - lastShakeTime < 800 || lastShakeTime == 0L){
